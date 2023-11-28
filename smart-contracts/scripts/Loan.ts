@@ -24,39 +24,56 @@ async function deployContracts(): Promise<void> {
   await contract.deployed();
   console.log(`CrossChainAutoTokenPrincipal deployed to ${contract.address}.`);
   console.log("Waiting for propagation of the CrossChainAutoTokenPrincipal contract...");
-  // await new Promise((resolve) => setTimeout(resolve, 30000));
+  await new Promise((resolve) => setTimeout(resolve, 30000));
 
-  // await run('verify:verify', {
-  //   address: contract.address,
-  //   constructorArguments: args,
-  // });
+  await run('verify:verify', {
+    address: contract.address,
+    constructorArguments: args,
+  });
 
-  //Deploy Escrow
+
+
+
+
+  //Deploy Coin
   console.log(`Deploying EscrowAutoToken to ${network.name} blockchain...`);
   const contractFactory2 = await ethers.getContractFactory("EscrowAutoToken");
-
+  
   const args2 = [
-    contract.address,
-    10,
-    "0x7cC763017E3190bA9720b5d6b37770f8F21cAd16",
-    1,
-    "0x991d1Cc695Fe3FC90CEf37b5A79FAb087904F5E1",
-    "0x991d1Cc695Fe3FC90CEf37b5A79FAb087904F5E1",
-    "0x991d1Cc695Fe3FC90CEf37b5A79FAb087904F5E1",
-    "0x991d1Cc695Fe3FC90CEf37b5A79FAb087904F5E1",
-    "1assjs"  
+    contract.address
   ] as const;
   
   const contract2  = await contractFactory2.deploy(...args2);
   await contract2.deployed();
   console.log(`EscrowAutoToken deployed to ${contract2.address}.`);
   console.log("Waiting for propagation of the contract EscrowAutoToken...");
-  // await new Promise((resolve) => setTimeout(resolve, 30000));
+  await new Promise((resolve) => setTimeout(resolve, 30000));
 
-  // await run('verify:verify', {
-  //   address: contract2.address,
-  //   constructorArguments: args2,
-  // });
+  await run('verify:verify', {
+    address: contract2.address,
+    constructorArguments: args2,
+  });
+
+
+
+  //Deploy Loan
+  console.log(`Deploying EscrowAutoToken to ${network.name} blockchain...`);
+  const contractFactory3 = await ethers.getContractFactory("EscrowAutoToken");
+  const [owner] = await ethers.getSigners();
+  const args3 = [
+    owner
+  ] as const;
+  
+  const contract3  = await contractFactory3.deploy(...args3);
+  await contract3.deployed();
+  console.log(`EscrowAutoToken deployed to ${contract3.address}.`);
+  console.log("Waiting for propagation of the contract EscrowAutoToken...");
+  await new Promise((resolve) => setTimeout(resolve, 30000));
+
+  await run('verify:verify', {
+    address: contract3.address,
+    constructorArguments: args3,
+  });
 
 }
 
