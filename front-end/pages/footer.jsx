@@ -11,7 +11,7 @@ import {
   chakra,
   useColorModeValue,
 } from '@chakra-ui/react'
-// import { FaTwitter, FaYoutube, FaInstagram } from 'react-icons/fa'
+import { FaTwitter, FaYoutube, FaInstagram } from 'react-icons/fa'
 
 // import { AppStoreBadge } from '#/components/AppStoreBadge'
 // import { PlayStoreBadge } from '#/components/PlayStoreBadge'
@@ -20,35 +20,35 @@ import {
 
 export default function Footer() {
 
-    const ListHeader = (props) => {
+    const ListHeader = () => {
         return (
           <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
-            {props}
+            
           </Text>
         )
       }
-      const SocialButton = () => {
-        return (
-          <chakra.button
-            bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
-            rounded={'full'}
-            w={8}
-            h={8}
-            cursor={'pointer'}
-            as={'a'}
-            href={href}
-            display={'inline-flex'}
-            alignItems={'center'}
-            justifyContent={'center'}
-            transition={'background 0.3s ease'}
-            _hover={{
-              bg: useColorModeValue('blackAlpha.200', 'whiteAlpha.200'),
-            }}>
-            <VisuallyHidden>{label}</VisuallyHidden>
-            {children}
-          </chakra.button>
-        )
-      }
+      // const SocialButton = () => {
+      //   return (
+      //     <chakra.button
+      //       bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
+      //       rounded={'full'}
+      //       w={8}
+      //       h={8}
+      //       cursor={'pointer'}
+      //       as={'a'}
+      //       // href={href}
+      //       display={'inline-flex'}
+      //       alignItems={'center'}
+      //       justifyContent={'center'}
+      //       transition={'background 0.3s ease'}
+      //       _hover={{
+      //         bg: useColorModeValue('blackAlpha.200', 'whiteAlpha.200'),
+      //       }}>
+      //       <VisuallyHidden></VisuallyHidden>
+          
+      //     </chakra.button>
+      //   )
+      // }
   return (
     <Box
       bg={useColorModeValue('gray.50', 'gray.900')}
@@ -122,15 +122,15 @@ export default function Footer() {
           align={{ md: 'center' }}>
           <Text>© 2022 Chakra Templates. All rights reserved</Text>
           <Stack direction={'row'} spacing={6}>
-            <SocialButton label={'Twitter'} href={'#'}>
+            
               <FaTwitter />
-            </SocialButton>
-            <SocialButton label={'YouTube'} href={'#'}>
+           
+           
               <FaYoutube />
-            </SocialButton>
-            <SocialButton label={'Instagram'} href={'#'}>
+           
+            
               <FaInstagram />
-            </SocialButton>
+            
           </Stack>
         </Container>
       </Box>
