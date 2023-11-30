@@ -36,7 +36,7 @@ const config: HardhatUserConfig = {
   networks: {
     hardhat: {
       chainId: 1337,
-      gas: "auto", 
+      gas: "auto",
     },
     moonbaseAlpha: {
       url: process.env.MOONBASE_URL || 'https://rpc.testnet.moonbeam.network',
@@ -103,7 +103,21 @@ const config: HardhatUserConfig = {
       chainId: 98765,
       accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
-  },
+  }, etherscan: {
+    apiKey: {
+      moonbaseAlpha: process.env.MOONSCAN_APIKEY || '', // Moonbeam Moonscan API Key
+      sepolia: process.env.ETHERSCAN_API_KEY || '', // Sepolia Etherscan API Key
+      polygonMumbai: process.env.POLYGONSCAN_API_KEY || '', // Polygon Mumbai Etherscan API Key
+      baseGoerli: process.env.BASESCAN_API_KEY || '', // Base Goerli Etherscan API Key
+      shibuya: process.env.SHIBUYA_BLOCKSCOUT_API_KEY || '', // Shibuya blockscout API KeyT
+      moonriver: process.env.MOONSCAN_APIKEY || '', // Moonriver Moonscan API Key
+      moonbeam: process.env.MOONSCAN_APIKEY || '', // Moonbeam Moonscan API Key
+      mainnet: process.env.ETHERSCAN_API_KEY || '', // Ethereum Etherscan API Key
+      polygon: process.env.POLYGONSCAN_API_KEY || '', // Polygon Etherscan API Key
+      base: process.env.BASESCAN_API_KEY || '', // Base Etherscan API Key
+      astar: process.env.ASTAR_BLOCKSCOUT_API_KEY || '', // Astar blockscout API KeyT
+    },
+  }
 };
 
 export default config;
