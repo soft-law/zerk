@@ -1,4 +1,24 @@
+import { ChakraProvider } from "@chakra-ui/react";
+import Head from 'next/head'
+import {
+  Box,
+  Heading,
+  Container,
+  Text,
+  Button,
+  Stack,
+  Icon,
+  useColorModeValue,
+  createIcon,
+  Image
+} from '@chakra-ui/react'
+import Simple from "./nav";
+import Footer from "./footer";
+import Hero from "./hero";
+
 export default function Home() {
+
+  
   return (
     <>
       <header>
@@ -7,8 +27,11 @@ export default function Home() {
         <link rel="icon" href="/frontend/public/vercel.svg" />
       </header>
       <main>
-        <h1>ZERK</h1>
-        <p>Welcome to ZERK!</p>
+      <>
+      <Simple />
+      <Hero />
+      <Footer />
+    </>
       </main>
     </>
   );
