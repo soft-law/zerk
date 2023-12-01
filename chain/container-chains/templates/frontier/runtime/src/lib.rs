@@ -300,7 +300,7 @@ pub const VERSION: RuntimeVersion = RuntimeVersion {
     spec_name: create_runtime_str!("frontier-template"),
     impl_name: create_runtime_str!("frontier-template"),
     authoring_version: 1,
-    spec_version: 400,
+    spec_version: 402,
     impl_version: 0,
     apis: RUNTIME_API_VERSIONS,
     transaction_version: 1,
@@ -869,6 +869,11 @@ impl pallet_author_inherent::Config for Runtime {
 
 impl pallet_root_testing::Config for Runtime {}
 
+impl pallet_template::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type WeightInfo = pallet_template::weights::SubstrateWeight<Runtime>;
+}
+
 // Create the runtime by composing the FRAME pallets that were previously configured.
 construct_runtime!(
     pub enum Runtime
@@ -907,6 +912,9 @@ construct_runtime!(
         PolkadotXcm: pallet_xcm::{Pallet, Call, Storage, Event<T>, Origin, Config<T>} = 73,
 
         RootTesting: pallet_root_testing = 100,
+
+		TemplateModule: pallet_template,
+
     }
 );
 
