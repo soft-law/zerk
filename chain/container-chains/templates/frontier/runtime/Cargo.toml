@@ -44,6 +44,14 @@ pallet-transaction-payment = { workspace = true }
 pallet-transaction-payment-rpc-runtime-api = { workspace = true }
 pallet-utility = { workspace = true }
 pallet-proxy = { workspace = true }
+
+pallet-identity = {workspace = true}
+pallet-collective = {workspace = true}
+pallet-treasury  = {workspace = true}
+pallet-bounties = {workspace = true}
+pallet-child-bounties = {workspace = true}
+node-primitives = {workspace = true}
+
 sp-api = { workspace = true }
 sp-block-builder = { workspace = true }
 sp-consensus-aura = { workspace = true }
@@ -133,10 +141,16 @@ std = [
 	"pallet-proxy/std",
 	"pallet-sudo/std",
 	"pallet-timestamp/std",
+	"node-primitives/std",
 	"pallet-transaction-payment-rpc-runtime-api/std",
 	"pallet-utility/std",
 	"pallet-template/std",
 	"pallet-xcm/std",
+	"pallet-identity/std",
+	"pallet-collective/std",
+	"pallet-treasury/std",
+	"pallet-bounties/std",
+	"pallet-child-bounties/std",
 	"parachain-info/std",
 	"parity-scale-codec/std",
 	"polkadot-parachain-primitives/std",
@@ -172,6 +186,11 @@ runtime-benchmarks = [
 	"pallet-ethereum/runtime-benchmarks",
 	"pallet-timestamp/runtime-benchmarks",
 	"pallet-xcm/runtime-benchmarks",
+	"pallet-identity/runtime-benchmarks",
+	"pallet-collective/runtime-benchmarks",
+	"pallet-treasury/runtime-benchmarks",
+	"pallet-bounties/runtime-benchmarks",
+	"pallet-child-bounties/runtime-benchmarks",
 	"sp-runtime/runtime-benchmarks",
 	"staging-xcm-builder/runtime-benchmarks",
 	"pallet-template/runtime-benchmarks",
@@ -199,6 +218,11 @@ try-runtime = [
 	"pallet-transaction-payment/try-runtime",
 	"pallet-utility/try-runtime",
 	"pallet-proxy/try-runtime",
+	"pallet-identity/try-runtime",
+	"pallet-collective/try-runtime",
+	"pallet-treasury/try-runtime",
+	"pallet-bounties/try-runtime",
+	"pallet-child-bounties/try-runtime",
 	"parachain-info/try-runtime",
 	"polkadot-runtime-common/try-runtime",
 	"sp-runtime/try-runtime",
