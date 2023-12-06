@@ -23,7 +23,7 @@ export default function Portada() {
       <Flex direction={"column"} w="60%" p="5" pl="10" align="center">
         <Heading>Zerk</Heading>
         <Text fontSize={"1.5rem"}>Real World Legal Asset Pallet</Text>
-        <Image src="zerkIcon.svg" sx={mainImage} />
+        <Image src="favicon.svg" sx={mainImage} />
         <Button bgColor={"rgba(0,0,0,0)"} color="#05D5FB" w="45%" border="1px">
           Implement Pallet!
         </Button>
