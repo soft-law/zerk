@@ -1,15 +1,15 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { UserContextProvider } from "../../context/User";
-// import "global.css";
+import { PolkadotJSContextProvider } from "../../context/PolkadotJS";
+import "./globals.css";
 
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <UserContextProvider>
+      <PolkadotJSContextProvider>
         <ChakraProvider>
           <Component {...pageProps} />
         </ChakraProvider>
-      </UserContextProvider>
+      </PolkadotJSContextProvider>
     </>
   );
 }

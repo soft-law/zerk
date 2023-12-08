@@ -1,4 +1,4 @@
-import Landing from "../../components/Landing";
+import Landing from "../app";
 
 export default function Page() {
   return <Landing />;
