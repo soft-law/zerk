@@ -10,7 +10,7 @@ export default function DIdentity() {
 
   const handleMetaLog = () => {
     MetaLog();
-    router.push("/DID");
+    router.push("/Dashboard");
   };
   return (
     <Flex
