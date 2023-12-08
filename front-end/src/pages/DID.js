@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import Landing from "../../components/Landing";
+import DID from "../../components/DID";
 
 // import { Inter } from "@next/font/google";
 
@@ -14,7 +14,7 @@ export default function Home() {
   }, []);
 
   if (isClient) {
-    return <Landing />;
+    return <DID />;
   } else {
     ("Not Working");
   }
