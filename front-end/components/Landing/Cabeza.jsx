@@ -1,26 +1,37 @@
 "use client";
-import { Flex, Image, Button, Heading } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
-import { usePolkadotJSContext } from "../../context/PolkadotJS";
+// Header.jsx
 
-export default function Heeader() {
-  const { PolkaWalletConnect } = usePolkadotJSContext();
+import { Flex, Button, Heading } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { usePolkadotJSContext } from "../../context/PolkadotJS";
+// import dynamic from "next/dynamic";
+
+// // Dynamically import useConnect
+// const WalletConnect = dynamic(
+//   () => import("../../utils/WalletConnect").then((m) => m.default),
+//   {
+//     ssr: false,
+//   }
+// );
+
+const Header = () => {
   const router = useRouter();
-  //Wallet Address state
+  const { handleConnect, state } = usePolkadotJSContext();
+
+  const handleConnection = () => {
+    handleConnect();
+    router.push("/Dashboard");
+  };
 
   return (
-    <Flex
-      // bgColor={"black"}
-      color="#05D5FB"
-      justify="space-between"
-      align={"center"}
-      h="10vh"
-    >
+    <Flex color="#05D5FB" justify="space-between" align="center" h="10vh" p={4}>
       <Heading>Zerk</Heading>
-      <Button bgColor={"#05D5FB"} color="#000575" onClick={PolkaWalletConnect}>
+      <Button bgColor="#05D5FB" color="#000575" onClick={handleConnection}>
         Login
       </Button>
-      <h3>Wallet Address: {"0x"} </h3>
+      {/* <h3>Wallet Address: {state} </h3> */}
     </Flex>
   );
-}
+};
+
+export default Header;
