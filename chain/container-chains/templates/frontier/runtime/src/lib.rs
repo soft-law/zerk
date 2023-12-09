@@ -30,7 +30,7 @@ pub use sp_runtime::BuildStorage;
 
 mod precompiles;
 pub mod xcm_config;
-
+use pallet_nfts::PalletFeatures;
 /// Constant values used within the runtime.
 pub mod constants;
 use constants::currency::*;
@@ -51,7 +51,7 @@ use {
         traits::{
             ConstU128, ConstU32, ConstU64, ConstU8, Contains, Currency as CurrencyT, FindAuthor,
             Imbalance, InstanceFilter, OffchainWorker, OnFinalize, OnIdle, OnInitialize,
-            OnRuntimeUpgrade, OnUnbalanced, EitherOfDiverse
+            OnRuntimeUpgrade, OnUnbalanced, EitherOfDiverse, AsEnsureOriginWithArg
         },
         weights::{
             constants::{
@@ -65,7 +65,7 @@ use {
     },
     frame_system::{
         limits::{BlockLength, BlockWeights},
-        EnsureRoot, EnsureWithSuccess,
+        EnsureRoot, EnsureWithSuccess, EnsureSigned,
     },
     nimbus_primitives::NimbusId,
     pallet_ethereum::{Call::transact, PostLogContent, Transaction as EthereumTransaction},
@@ -1051,6 +1051,48 @@ impl pallet_child_bounties::Config for Runtime {
 	type WeightInfo = pallet_child_bounties::weights::SubstrateWeight<Runtime>;
 }
 
+parameter_types! {
+	pub Features: PalletFeatures = PalletFeatures::all_enabled();
+	pub const MaxAttributesPerCall: u32 = 10;
+    pub const CollectionDeposit: Balance = 100 * DOLLARS;
+    pub const ItemDeposit: Balance = 1 * DOLLARS;
+    pub const MetadataDepositBase: Balance = 10 * DOLLARS;
+    pub const MetadataDepositPerByte: Balance = 1 * DOLLARS;
+    pub const ApprovalsLimit: u32 = 20;
+    pub const MaxTips: u32 = 10;
+    pub const ItemAttributesApprovalsLimit: u32 = 20;
+    pub const MaxDeadlineDuration: BlockNumber = 12 * 30 * DAYS;
+}
+
+impl pallet_nfts::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type CollectionId = u32;
+	type ItemId = u32;
+	type Currency = Balances;
+	type ForceOrigin = frame_system::EnsureRoot<AccountId>;
+	type CollectionDeposit = CollectionDeposit;
+	type ItemDeposit = ItemDeposit;
+	type MetadataDepositBase = MetadataDepositBase;
+	type AttributeDepositBase = MetadataDepositBase;
+	type DepositPerByte = MetadataDepositPerByte;
+	type StringLimit = ConstU32<256>;
+	type KeyLimit = ConstU32<64>;
+	type ValueLimit = ConstU32<256>;
+	type ApprovalsLimit = ApprovalsLimit;
+	type ItemAttributesApprovalsLimit = ItemAttributesApprovalsLimit;
+	type MaxTips = MaxTips;
+	type MaxDeadlineDuration = MaxDeadlineDuration;
+	type MaxAttributesPerCall = MaxAttributesPerCall;
+	type Features = Features;
+	type OffchainSignature = Signature;
+	type OffchainPublic = <Signature as Verify>::Signer;
+	type WeightInfo = pallet_nfts::weights::SubstrateWeight<Runtime>;
+	#[cfg(feature = "runtime-benchmarks")]
+	type Helper = ();
+	type CreateOrigin = AsEnsureOriginWithArg<EnsureSigned<AccountId>>;
+	type Locker = ();
+}
+
 // Create the runtime by composing the FRAME pallets that were previously configured.
 construct_runtime!(
     pub enum Runtime
@@ -1099,6 +1141,7 @@ construct_runtime!(
         ChildBounties: pallet_child_bounties = 106,
         Bounties: pallet_bounties = 107,
         Identity: pallet_identity = 108,
+        Nfts: pallet_nfts = 109,
 
     }
 );

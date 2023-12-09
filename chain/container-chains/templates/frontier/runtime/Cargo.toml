@@ -44,6 +44,7 @@ pallet-transaction-payment = { workspace = true }
 pallet-transaction-payment-rpc-runtime-api = { workspace = true }
 pallet-utility = { workspace = true }
 pallet-proxy = { workspace = true }
+pallet-nfts = {workspace = true}
 
 pallet-identity = {workspace = true}
 pallet-collective = {workspace = true}
@@ -151,6 +152,7 @@ std = [
 	"pallet-treasury/std",
 	"pallet-bounties/std",
 	"pallet-child-bounties/std",
+	"pallet-nfts/std",
 	"parachain-info/std",
 	"parity-scale-codec/std",
 	"polkadot-parachain-primitives/std",
@@ -194,6 +196,7 @@ runtime-benchmarks = [
 	"sp-runtime/runtime-benchmarks",
 	"staging-xcm-builder/runtime-benchmarks",
 	"pallet-template/runtime-benchmarks",
+	"pallet-nfts/runtime-benchmarks",
 ]
 
 try-runtime = [
@@ -227,4 +230,5 @@ try-runtime = [
 	"polkadot-runtime-common/try-runtime",
 	"sp-runtime/try-runtime",
 	"pallet-template/try-runtime",
+	"pallet-nfts/try-runtime",
 ]
