@@ -1,16 +1,13 @@
 "use client";
 
 import { Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
-import { useUserContext } from "../../context/User";
 import { useRouter } from "next/navigation";
 
 export default function DIdentity() {
-  const { MetaLog } = useUserContext();
   const router = useRouter();
 
   const handleMetaLog = () => {
-    MetaLog();
-    router.push("/Dashboard");
+    router.push("/DID");
   };
   return (
     <Flex

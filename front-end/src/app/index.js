@@ -1,11 +1,11 @@
 "use client";
 import Head from "next/head";
-import Heeader from "./Cabeza";
-import Portada from "./Portada";
-import Nosotros from "./DIdentity";
-import UseCases from "./UseCases";
-import Team from "./team";
-import Contacto from "./Contacto";
+import Heeader from "../../components/Landing/Cabeza";
+import Portada from "../../components/Landing/Portada";
+import Nosotros from "../../components/Landing/DIdentity";
+import UseCases from "../../components/Landing/UseCases";
+import Team from "../../components/Landing/team";
+import Contacto from "../../components/Landing/Contacto";
 
 export default function Landing() {
   return (

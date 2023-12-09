@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import Landing from "../../components/Landing";
+import DID from "../../components/DID";
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
@@ -10,7 +10,7 @@ export default function Home() {
   }, []);
 
   if (isClient) {
-    return <Landing />;
+    return <DID />;
   } else {
     ("Not Working");
   }

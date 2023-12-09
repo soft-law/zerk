@@ -19,7 +19,7 @@ export default function Portada() {
   };
 
   return (
-    <Flex align="center" borderTop={"1px"}>
+    <Flex align="center" borderTop={"1px"} justifyContent={"center"}>
       <Flex direction={"column"} w="60%" p="5" pl="10" align="center">
         <Heading>Zerk</Heading>
         <Text fontSize={"1.5rem"}>Real World Legal Asset Pallet</Text>
