@@ -1,33 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
-    :root {
-        --legal-blue: #4D05F8;
-        --punch-green: #14F08C;
-        --geek-blue: #000575;
-        --thinking-blue: #05D5FB;
-        --cherry-tech: #fa0550;
-        --yellow-green: #ADFF00;
-    }
-    
-    * {
-        padding: 0%;
-        margin: 0%;
-        border: 0%;
-        background-color: #4D05F8;
-        color: var(--yellow-green);
-        font: 'Raleway', sans-serif;
-    }
-    
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap");
+:root {
+  --legal-blue: #4d05f8;
+  --punch-green: #14f08c;
+  --geek-blue: #000575;
+  --thinking-blue: #05d5fb;
+  --cherry-tech: #fa0550;
+  --yellow-green: #adff00;
+}
+
+* {
+  padding: 0%;
+  margin: 0%;
+  border: 0%;
+  background-color: #969696;
+  color: var(--yellow-green);
+  font: "Raleway", sans-serif;
+}
 
 .index {
-    /* background-color: #05D5FB; */
-    color:#000575;
-
+  /* background-color: #05D5FB; */
+  color: #969696;
 }
 
 main {
-    align-items: center;
-    text-align: center;
-    
+  align-items: center;
+  text-align: center;
 }
 
 /* .titulo {

@@ -6,6 +6,7 @@ import Nosotros from "../../components/Landing/DIdentity";
 import UseCases from "../../components/Landing/UseCases";
 import Team from "../../components/Landing/team";
 import Contacto from "../../components/Landing/Contacto";
+import Hero from "../../components/comps/hero";
 
 export default function Landing() {
   return (
@@ -21,7 +22,7 @@ export default function Landing() {
         <Heeader />
       </header>
       <main>
-        <Portada />
+        <Hero />
       </main>
       <section>
         <Nosotros />
