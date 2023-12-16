@@ -1,26 +1,32 @@
 import { useRouter } from "next/router";
 import { usePolkadotJSContext } from "../../context/PolkadotJS";
+import Simple from "../comps/nav";
+import Footer from "../comps/footer";
 export default function Dashboard() {
   const { handleConnect, api } = usePolkadotJSContext();
 
   return (
-    <div>
-      {api.loading && <p>Loading...</p>}
-      {api.error && <p>Error: {api.error.message}</p>}
-      {api.data && (
-        <>
-          <p>Data:</p>
-          <ul>
-            {api.data.accounts.map((account) => (
-              <li key={account.address}>{account.address}</li>
-            ))}
-          </ul>
-          <p>Default Account: {api.data.defaultAccount.address}</p>
-        </>
-      )}
-      <button onClick={handleConnect} disabled={api.loading}>
-        {api.loading ? "Connecting..." : "Connect"}
-      </button>
-    </div>
+    <>
+      <Simple />
+      <div>
+        {state.loading && <p>Loading...</p>}
+        {state.error && <p>Error: {state.error.message}</p>}
+        {state.data && (
+          <>
+            <p>Data:</p>
+            <ul>
+              {state.data.accounts.map((account) => (
+                <li key={account.address}>{account.address}</li>
+              ))}
+            </ul>
+            <p>Default Account: {state.data.defaultAccount.address}</p>
+          </>
+        )}
+        <button onClick={handleConnect} disabled={state.loading}>
+          {state.loading ? "Connecting..." : "Connect"}
+        </button>
+      </div>
+      <Footer />
+    </>
   );
 }
