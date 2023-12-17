@@ -57,7 +57,7 @@ export default function Simple() {
           />
           <HStack spacing={8} alignItems={"center"}>
             <Box boxSize={"1rem"}>
-              <Image src="zerk idea ZSmll.png"></Image>
+              <Image src="favicon.svg"></Image>
             </Box>
             <HStack
               as={"nav"}
