@@ -15,7 +15,10 @@ export default function DID() {
         <Image w="10rem" src={"contracts.svg"} />
         <Box>
           <Text>Hola</Text>
-          <Button onClick={connectTanssi}> I want to be a validator</Button>
+          <Button onClick={connectTanssi}>
+            {" "}
+            I want to be a Legal Validator
+          </Button>
         </Box>
       </Flex>
     </Box>

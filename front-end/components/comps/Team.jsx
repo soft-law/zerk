@@ -20,7 +20,7 @@ export default function Team() {
             alt="Wolfhack profile pic"
           />
           <Text fontSize="1.5rem">Wolfhack</Text>
-          <Text>Front-End & Smart-Contract Develloper</Text>
+          <Text>Legal Wizzard & Web3 Coder</Text>
         </Box>
         <Box align="center" m="5">
           <Image
@@ -28,8 +28,8 @@ export default function Team() {
             sx={profileImage}
             alt="Wolfhack profile pic"
           />
-          <Text fontSize="1.5rem">Wolfhack</Text>
-          <Text>Front-End & Smart-Contract Develloper</Text>
+          <Text fontSize="1.5rem">Terratek</Text>
+          <Text>Digital Artist</Text>
         </Box>
         <Box align="center" m="5">
           <Image

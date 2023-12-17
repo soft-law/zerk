@@ -1,32 +1,51 @@
 import { useRouter } from "next/router";
 import { usePolkadotJSContext } from "../../context/PolkadotJS";
 import Simple from "../comps/nav";
-import Footer from "../comps/footer";
+import Footer from "../comps/Contact";
+import HeadDash from "./HeadDash.jsx";
+import Assets from "./Assets";
+import {
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
+  Image,
+  Flex,
+} from "@chakra-ui/react";
+import Verificators from "./Verificator";
 export default function Dashboard() {
-  const { handleConnect, api } = usePolkadotJSContext();
+  const styleTabList = {
+    mt: "7rem",
+    mb: "7rem",
+    ml: "1rem",
+    mr: "1rem",
+    fontSize: "xl",
+  };
 
   return (
     <>
-      <Simple />
-      <div>
-        {state.loading && <p>Loading...</p>}
-        {state.error && <p>Error: {state.error.message}</p>}
-        {state.data && (
-          <>
-            <p>Data:</p>
-            <ul>
-              {state.data.accounts.map((account) => (
-                <li key={account.address}>{account.address}</li>
-              ))}
-            </ul>
-            <p>Default Account: {state.data.defaultAccount.address}</p>
-          </>
-        )}
-        <button onClick={handleConnect} disabled={state.loading}>
-          {state.loading ? "Connecting..." : "Connect"}
-        </button>
-      </div>
-      <Footer />
+      {/* <Simple /> */}
+      <Tabs isManual variant="none" orientation="vertical" isFitted>
+        <TabList>
+          <Flex bgColor="Black" direction="column">
+            <HeadDash sx={styleTabList} />
+            <Tab sx={styleTabList}>Invest & Earn</Tab>
+            <Tab sx={styleTabList}>Help the enviroment</Tab>
+            <Tab sx={styleTabList}>Swap</Tab>
+          </Flex>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            <Assets />
+          </TabPanel>
+          <TabPanel>
+            <Verificators />
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+
+      {/* <Footer /> */}
     </>
   );
 }

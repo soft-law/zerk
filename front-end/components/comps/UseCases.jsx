@@ -10,6 +10,7 @@ export default function UseCases() {
 
   return (
     <Box textAlign="center">
+      <Heading>RWA TOKENIZATION</Heading>
       <Heading>USE CASES</Heading>
       <Flex w="100%" align="center">
         <Box sx={styleContratos}>
