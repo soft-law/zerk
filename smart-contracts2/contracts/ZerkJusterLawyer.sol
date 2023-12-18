@@ -33,11 +33,12 @@ contract ZerkJusterLawyer {
     struct Juster {
         uint id;
         string name;
+        string jurisdiction;
         bool isValidated;
     }
 
     struct Lawyer {
-        uint id;
+        uint licenseNumber;
         string name;
         string jurisdiction;
         string especiality;
@@ -61,7 +62,7 @@ contract ZerkJusterLawyer {
 
     address public owner;
     address[] public lawyers;
-    address public juster;
+    address[] public justers;
 
     ///////////////////////////////////////
     // ----------- CONSTRUCTOR ----------//
@@ -79,22 +80,12 @@ contract ZerkJusterLawyer {
     }
 
     modifier onlyLawyer() {
-        bool isLawyer = false;
-
-        // Verifies if the caller is in lawyers array
-        for (uint i = 0; i < lawyers.length; i++) {
-            if (lawyers[i] == msg.sender) {
-                isLawyer = true;
-                break;
-            }
-        }
-
-        require(isLawyer, "Only a lawyer");
+        require(isLawyer(msg.sender), "Only a lawyer");
         _;
     }
 
     modifier onlyJuster() {
-        require(msg.sender == juster, "Only juster");
+        require(isJuster(msg.sender), "Only a Juster");
         _;
     }
 
@@ -122,6 +113,7 @@ contract ZerkJusterLawyer {
     ///////////////////////////////////////
 
     function createLawyer(
+        uint _licenseNumber,
         string memory _name,
         string memory _jurisdiction,
         string memory _especiality
@@ -129,7 +121,7 @@ contract ZerkJusterLawyer {
         require(!s_lawyers[msg.sender].isValidated, "Lawyer already exists");
 
         Lawyer memory newLawyer = Lawyer({
-            id: lastJusterId,
+            licenseNumber: _licenseNumber,
             name: _name,
             jurisdiction: _jurisdiction,
             especiality: _especiality,
@@ -146,37 +138,39 @@ contract ZerkJusterLawyer {
         lastLawyerId += 1;
     }
 
-    function validateLawyer(uint _lawyerId) public onlyOwner {
+    function validateLawyer(uint _licenseNumber) public onlyOwner {
         // Verifies ID Lawyer exists in Lawyers array
-        require(
-            isLawyerAddressValid(getLawyerAddress(_lawyerId)),
-            "Invalid Lawyer Address"
-        );
+        require(isLawyerAddressValid(msg.sender), "Invalid Lawyer Address");
 
         // Verifies the Lawyer isnt validated yet
         require(
-            !s_lawyers[getLawyerAddress(_lawyerId)].isValidated,
+            !s_lawyers[msg.sender].isValidated,
             "Lawyer is already validated"
         );
 
         // Marks Lawyers as Valid
-        s_lawyers[getLawyerAddress(_lawyerId)].isValidated = true;
+        s_lawyers[msg.sender].isValidated = true;
 
         // Call addLawyer function
-        addLawyer(getLawyerAddress(_lawyerId));
+        addLawyer(msg.sender);
 
         // event: LawyerModfied
         emit LawyerModified(lastLawyerId, msg.sender);
     }
 
-    /////Create Juster Function /////
+    ////////////////////////////////////////////
+    /////Create JUSTER Function /////
     /////Public Function, anyone can be a Juster /////
-    function createJuster(string memory _name) public {
+    function createJuster(
+        string memory _name,
+        string memory _jurisdiction
+    ) public {
         require(!s_justers[msg.sender].isValidated, "Juster already exists");
 
         Juster memory newJuster = Juster({
             id: lastJusterId,
             name: _name,
+            jurisdiction: _jurisdiction,
             isValidated: false
         });
 
@@ -219,13 +213,14 @@ contract ZerkJusterLawyer {
     //READ FUNCTIONS//
     ///////////////////
 
-    function getLawyerAddress(uint _lawyerId) public view returns (address) {
+    function getLawyerAddress(
+        uint _licenseNumber
+    ) public view returns (address) {
         require(
-            _lawyerId > 0 && _lawyerId <= lawyers.length,
-            "Invalid Lawyer ID"
+            _licenseNumber > 0 && _licenseNumber <= lastLawyerId,
+            "Invalid Lawyer License Number"
         );
-        address lawyerAddress = lawyers[_lawyerId];
-        return lawyerAddress;
+        return lawyers[_licenseNumber - 1];
     }
 
     function isLawyerAddressValid(
@@ -241,6 +236,24 @@ contract ZerkJusterLawyer {
 
     function getJusterAddress(uint _justerId) public view returns (address) {
         require(_justerId > 0 && _justerId < lastJusterId, "Invalid Juster ID");
-        return address(uint160(_justerId)); // Convertir el ID a dirección
+        return justers[_justerId - 1];
+    }
+
+    function isLawyer(address _account) internal view returns (bool) {
+        for (uint i = 0; i < lawyers.length; i++) {
+            if (lawyers[i] == _account) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function isJuster(address _account) internal view returns (bool) {
+        for (uint i = 0; i < justers.length; i++) {
+            if (justers[i] == _account) {
+                return true;
+            }
+        }
+        return false;
     }
 }
