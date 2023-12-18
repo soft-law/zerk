@@ -2,11 +2,10 @@ const hre = require("hardhat");
 
 async function main() {
   const [deployer] = await ethers.getSigners();
+  console.log("Deploying ZerkToken with the account:", deployer.address);
 
-  console.log("Deploying ZerkMinig with the account:", deployer.address);
-
-  // Deploy ZerkToken
-  const ZerkToken = await hre.ethers.deployContract("ZerkMinig", [
+  //-----Deploy & Verify ZerkToken-----//
+  const ZerkToken = await hre.ethers.deployContract("ZerkToken", [
     deployer.address,
   ]);
 
@@ -19,6 +18,36 @@ async function main() {
   run("verify:verify", {
     address: ZerkContract.target,
     constructorArguments: [deployer.address],
+  });
+
+  //------Deploy & Verify ZerkAccess-----//
+  const ZerkAccess = await hre.ethers.deployContract("ZerkAccess", []);
+
+  const ZerkAccessContract = await ZerkAccess.waitForDeployment();
+
+  console.log("ZerkAccess deployed to:", ZerkAccessContract.target);
+
+  await new Promise((resolve) => setTimeout(resolve, 30000));
+
+  run("verify:verify", {
+    address: ZerkAccessContract.target,
+    constructorArguments: [],
+  });
+
+  //------Deploy & Verify ZerkJust------//
+  const ZerkJust = await hre.ethers.deployContract("ZerkJust", [
+    ZerkAccessContract.target,
+  ]);
+
+  const ZerkJustContract = await ZerkJust.waitForDeployment();
+
+  console.log("ZerkJust deployed to:", ZerkJustContract.target);
+
+  await new Promise((resolve) => setTimeout(resolve, 30000));
+
+  run("verify:verify", {
+    address: ZerkJustContract.target,
+    constructorArguments: [ZerkAccessContract.target],
   });
 }
 
