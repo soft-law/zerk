@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 import "./ZerkJusterLawyer.sol";
 
-contract ZerkJust is ZerkJusterLawyer {
+contract ZerkCase is ZerkJusterLawyer {
     struct Case {
         uint id;
         string caseNumber;
@@ -38,7 +38,7 @@ contract ZerkJust is ZerkJusterLawyer {
         uint _justerId
     ) public onlyJuster {
         // Verificar que el Juster con el ID proporcionado exista
-        require(_justerId > 0 && _justerId < nextJusterId, "Invalid Juster ID");
+        require(_justerId > 0 && _justerId < lastJusterId, "Invalid Juster ID");
         require(
             s_justers[caseToJuster[_justerId]].isValidated,
             "Juster must be validated"

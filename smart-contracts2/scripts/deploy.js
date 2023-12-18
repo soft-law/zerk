@@ -20,8 +20,8 @@ async function main() {
     constructorArguments: [deployer.address],
   });
 
-  //------Deploy & Verify ZerkAccess-----//
-  const ZerkAccess = await hre.ethers.deployContract("ZerkAccess", []);
+  //------Deploy & Verify  ZerkJusterLawyer-----//
+  const ZerkAccess = await hre.ethers.deployContract("ZerkJusterLawyer", []);
 
   const ZerkAccessContract = await ZerkAccess.waitForDeployment();
 
@@ -35,7 +35,7 @@ async function main() {
   });
 
   //------Deploy & Verify ZerkJust------//
-  const ZerkJust = await hre.ethers.deployContract("ZerkJust", [
+  const ZerkJust = await hre.ethers.deployContract("ZerkCase", [
     ZerkAccessContract.target,
   ]);
 
