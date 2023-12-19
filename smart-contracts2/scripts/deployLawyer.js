@@ -5,7 +5,9 @@ async function main() {
   console.log("Deploying LawyerContract with the account:", deployer.address);
 
   //-----Deploy & Verify Lawyer-----//
-  const LawyerContract = await hre.ethers.deployContract("LawyerContract");
+  const LawyerContract = await hre.ethers.deployContract(
+    "LawyerJusterContract"
+  );
 
   const ZerkLawyer = await LawyerContract.waitForDeployment();
 
