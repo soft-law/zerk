@@ -20,34 +20,24 @@ export default function Team() {
             alt="Wolfhack profile pic"
           />
           <Text fontSize="1.5rem">Wolfhack</Text>
-          <Text>Legal Wizzard & Web3 Coder</Text>
+          <Text>Legal Wizzard & Web3 Dev.</Text>
         </Box>
+
         <Box align="center" m="5">
           <Image
-            src={"wolf.jpg"}
+            src={
+              "https://copper-ready-guanaco-464.mypinata.cloud/ipfs/QmehojxFh3g14QhDNzSZ7fAMxnemnLAxy8PbEbNmwqmbzV?_gl=1*14nkjjq*_ga*MTM1ODQ0MTgxMi4xNjk2NzkyMjEz*_ga_5RMPXG14TE*MTcwMjk2MjQwMC40My4xLjE3MDI5NjI0MjguMzIuMC4w"
+            }
             sx={profileImage}
-            alt="Wolfhack profile pic"
+            alt="Ganesh profile pic"
           />
-          <Text fontSize="1.5rem">Terratek</Text>
-          <Text>Digital Artist</Text>
+          <Text fontSize="1.5rem">Ganesh</Text>
+          <Text>Substrate Dev.</Text>
         </Box>
         <Box align="center" m="5">
-          <Image
-            src={"wolf.jpg"}
-            sx={profileImage}
-            alt="Wolfhack profile pic"
-          />
-          <Text fontSize="1.5rem">Wolfhack</Text>
-          <Text>Front-End & Smart-Contract Develloper</Text>
-        </Box>
-        <Box align="center" m="5">
-          <Image
-            src={"wolf.jpg"}
-            sx={profileImage}
-            alt="Wolfhack profile pic"
-          />
-          <Text fontSize="1.5rem">Wolfhack</Text>
-          <Text>Front-End & Smart-Contract Develloper</Text>
+          <Image src={"wolf.jpg"} sx={profileImage} alt="Nagra profile pic" />
+          <Text fontSize="1.5rem">Nagra Rohit</Text>
+          <Text>Solidity Dev.</Text>
         </Box>
       </Flex>
     </Flex>

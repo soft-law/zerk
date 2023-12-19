@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@adraffy/ens-normalize@1.10.0":
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/@adraffy/ens-normalize/-/ens-normalize-1.10.0.tgz#d2a39395c587e092d77cbbc80acf956a54f38bf7"
+  integrity sha512-nA9XHtlAkYfJxY7bce8DcN7eKxWWCWkU+1GR9d+U6MbNpfwQp8TI7vqOsBsMcHoT4mBu2kypKoSKnghEzOOq5Q==
+
 "@babel/code-frame@^7.0.0":
   version "7.23.4"
   resolved "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.23.4.tgz"
@@ -1034,7 +1039,7 @@
   resolved "https://registry.npmjs.org/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-14.0.3.tgz"
   integrity sha512-ERhKPSJ1vQrPiwrs15Pjz/rvDHZmkmvbf/BjPN/UCOI++ODftT0GtasDPi0j+y6PPJi5HsXw+dpRaXUaw4vjuQ==
 
-"@noble/curves@^1.2.0":
+"@noble/curves@1.2.0", "@noble/curves@^1.2.0":
   version "1.2.0"
   resolved "https://registry.npmjs.org/@noble/curves/-/curves-1.2.0.tgz"
   integrity sha512-oYclrNgRaM9SsBUBVbb8M6DTV7ZHRTKugureoYEncY5c65HOmRzvSiTE3y5CYaPYJA/GVkrhXEoF0M3Ya9PMnw==
@@ -1455,6 +1460,11 @@
   dependencies:
     undici-types "~5.26.4"
 
+"@types/node@18.15.13":
+  version "18.15.13"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.15.13.tgz#f64277c341150c979e42b00e4ac289290c9df469"
+  integrity sha512-N+0kuo9KgrUQ1Sn/ifDXsvg0TTleP7rIy4zOBGECxAljqvqfqpTfzx0Q1NUedOixRMBfe2Whhb056a42cWs26Q==
+
 "@types/parse-json@^4.0.0":
   version "4.0.2"
   resolved "https://registry.npmjs.org/@types/parse-json/-/parse-json-4.0.2.tgz"
@@ -1476,6 +1486,11 @@
   integrity sha512-a7U/HSopvQbrDU4GLerpqiMcHKEkQkNPeDZJWz38cw/6Upunh41GjHetq5TB84hxyCaDzJ6q2nEdNoBQfC0FKA==
   dependencies:
     "@zag-js/dom-query" "0.16.0"
+
+aes-js@4.0.0-beta.5:
+  version "4.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/aes-js/-/aes-js-4.0.0-beta.5.tgz#8d2452c52adedebc3a3e28465d858c11ca315873"
+  integrity sha512-G965FqalsNyrPqgEGON7nIx1e/OVENSgiEIzyC63haUMuvNnwIgIjMs52hlTCKhkBny7A2ORNlfY9Zu+jmGk1Q==
 
 ansi-styles@^3.2.1:
   version "3.2.1"
@@ -1631,6 +1646,19 @@ escape-string-regexp@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz"
   integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
+
+ethers@^6.9.0:
+  version "6.9.0"
+  resolved "https://registry.yarnpkg.com/ethers/-/ethers-6.9.0.tgz#a4534bdcdfde306aee94ef32f3d5c70d7e33fcb9"
+  integrity sha512-pmfNyQzc2mseLe91FnT2vmNaTt8dDzhxZ/xItAV7uGsF4dI4ek2ufMu3rAkgQETL/TIs0GS5A+U05g9QyWnv3Q==
+  dependencies:
+    "@adraffy/ens-normalize" "1.10.0"
+    "@noble/curves" "1.2.0"
+    "@noble/hashes" "1.3.2"
+    "@types/node" "18.15.13"
+    aes-js "4.0.0-beta.5"
+    tslib "2.4.0"
+    ws "8.5.0"
 
 eventemitter3@^5.0.1:
   version "5.0.1"
@@ -2117,6 +2145,11 @@ web-streams-polyfill@^3.0.3:
   version "3.2.1"
   resolved "https://registry.npmjs.org/web-streams-polyfill/-/web-streams-polyfill-3.2.1.tgz"
   integrity sha512-e0MO3wdXWKrLbL0DgGnUV7WHVuw9OUvL4hjgnPkIeEvESk74gAITi5G606JtZPp39cd8HA9VQzCIvA49LpPN5Q==
+
+ws@8.5.0:
+  version "8.5.0"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.5.0.tgz#bfb4be96600757fe5382de12c670dab984a1ed4f"
+  integrity sha512-BWX0SWVgLPzYwF8lTzEy1egjhS4S4OEAHfsO8o65WOVsrnSRGaSiUaa9e0ggGlkMTtBlmOpEXiie9RUcBO86qg==
 
 ws@^8.14.2, ws@^8.8.1:
   version "8.14.2"

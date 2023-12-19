@@ -44,9 +44,7 @@ export default function Hero() {
             network
           </Text>
         </Heading>
-        <Text>
-          Revolutionizing the RWA Industry with a Secure, Transparent Ecosystem.
-        </Text>
+        <Text>Descentralized Justice</Text>
         <Stack
           direction={"column"}
           spacing={3}

@@ -1,6 +1,6 @@
 import { Heading, Text } from "@chakra-ui/react";
 
-export default function Assets() {
+export default function Funding() {
   return (
     <>
       <Heading>Assets</Heading>
