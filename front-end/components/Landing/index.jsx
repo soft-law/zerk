@@ -3,7 +3,7 @@ import Head from "next/head";
 import Heeader from "./HeadTop";
 import FrontMain from "./FrontMain";
 import Chain from "./Chain";
-import DIdentity from "../../components/comps/DIdentity";
+import DIdentity from "./DIdentity";
 import UseCases from "../../components/comps/UseCases";
 import Team from "../../components/comps/Team";
 import Contact from "../comps/Contact";
@@ -24,9 +24,9 @@ export default function Landing() {
       <main>
         <FrontMain />
       </main>
-      <section>
+      {/* <section>
         <Chain />
-      </section>
+      </section> */}
       <section>
         <UseCases />
       </section>

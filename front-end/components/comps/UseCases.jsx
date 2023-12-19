@@ -10,27 +10,27 @@ export default function UseCases() {
 
   return (
     <Box textAlign="center">
-      <Heading>RWA TOKENIZATION</Heading>
-      <Heading>USE CASES</Heading>
+      <Heading>Get Funded</Heading>
+      <Heading>Take Legal Action</Heading>
       <Flex w="100%" align="center">
         <Box sx={styleContratos}>
           <Image src={"vehicles.svg"} />
-          <Text>Vehicles.</Text>
+          <Text>Enviromental.</Text>
         </Box>
         <Box sx={styleContratos}>
           <Image src={"realState.svg"} />
-          <Text>Real State.</Text>
+          <Text>Criminal.</Text>
         </Box>
-        <Box sx={styleContratos}>
+        {/* <Box sx={styleContratos}>
           <Image src={"Pacto_Socios.svg"} />
           <Text>Commodities.</Text>
         </Box>
         <Box sx={styleContratos}>
           <Image src={"jelwery.svg"} />
           <Text>Jelwery.</Text>
-        </Box>
+        </Box> */}
       </Flex>
-      <Flex>
+      {/* <Flex>
         <Spacer />
         <Box sx={styleContratos}>
           <Image src={"art.svg"} />
@@ -45,7 +45,7 @@ export default function UseCases() {
           <Text>Contracts.</Text>
         </Box>
         <Spacer />
-      </Flex>
+      </Flex> */}
     </Box>
   );
 }

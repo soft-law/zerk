@@ -2,8 +2,8 @@ import { useRouter } from "next/router";
 import { usePolkadotJSContext } from "../../context/PolkadotJS";
 import Simple from "../comps/nav";
 import Footer from "../comps/Contact";
-import HeadDash from "./HeadDash.jsx";
-import Assets from "./Assets";
+import HeadDash from "../comps/HeadDash.jsx";
+import Funding from "./Funding";
 import {
   Tabs,
   TabList,
@@ -30,22 +30,19 @@ export default function Dashboard() {
         <TabList>
           <Flex bgColor="Black" direction="column">
             <HeadDash sx={styleTabList} />
-            <Tab sx={styleTabList}>Invest & Earn</Tab>
-            <Tab sx={styleTabList}>Help the enviroment</Tab>
-            <Tab sx={styleTabList}>Swap</Tab>
+            <Tab sx={styleTabList}>Funding Cases</Tab>
+            <Tab sx={styleTabList}>Descentralized Identity</Tab>
           </Flex>
         </TabList>
         <TabPanels>
           <TabPanel>
-            <Assets />
+            <Funding />
           </TabPanel>
           <TabPanel>
             <Verificators />
           </TabPanel>
         </TabPanels>
       </Tabs>
-
-      {/* <Footer /> */}
     </>
   );
 }
