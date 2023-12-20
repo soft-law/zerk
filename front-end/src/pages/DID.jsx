@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import DID from "../../components/DID";
+import DID from "../../components/Dashboard";
 
 // import { Inter } from "@next/font/google";
 

@@ -1,9 +1,3 @@
-import { useRouter } from "next/router";
-import { usePolkadotJSContext } from "../../context/PolkadotJS";
-import Simple from "../comps/nav";
-import Footer from "../comps/Contact";
-import HeadDash from "../comps/HeadDash.jsx";
-import Funding from "./Funding";
 import {
   Tabs,
   TabList,
@@ -12,8 +6,16 @@ import {
   TabPanel,
   Image,
   Flex,
+  Heading,
+  Text,
+  Box,
+  Button,
 } from "@chakra-ui/react";
-import Verificators from "./Juster";
+import HeadDash from "../comps/HeadDash";
+import LegalVerificator from "./Lawyer";
+import { useEVMWalletContext } from "../../context/EVMWallet";
+import Juster from "./Juster";
+import Investor from "./Investor";
 export default function Dashboard() {
   const styleTabList = {
     mt: "7rem",
@@ -23,6 +25,12 @@ export default function Dashboard() {
     fontSize: "xl",
   };
 
+  const { createLawyer } = useEVMWalletContext();
+
+  const handleConnectWallet = () => {
+    createLawyer();
+  };
+
   return (
     <>
       {/* <Simple /> */}
@@ -30,19 +38,25 @@ export default function Dashboard() {
         <TabList>
           <Flex bgColor="Black" direction="column">
             <HeadDash sx={styleTabList} />
-            <Tab sx={styleTabList}>Descentralized Identity</Tab>
-            <Tab sx={styleTabList}>Get Funded!</Tab>
+            <Tab sx={styleTabList}>Justers</Tab>
+            <Tab sx={styleTabList}>Lawyers</Tab>
+            <Tab sx={styleTabList}>Investors</Tab>
           </Flex>
         </TabList>
         <TabPanels>
           <TabPanel>
-            <Verificators />
+            <Juster />
           </TabPanel>
           <TabPanel>
-            <Funding />
+            <LegalVerificator />
+          </TabPanel>
+          <TabPanel>
+            <Investor />
           </TabPanel>
         </TabPanels>
       </Tabs>
+
+      {/* <Footer /> */}
     </>
   );
 }
