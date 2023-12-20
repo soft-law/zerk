@@ -1,34 +1,22 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title ZERK NETWORK LAWYER AND JUSTERS
-/// @author soft.law --->>
-///////////////////////////////////////
-/////////////// WOLFHACK///////////////
-///////////////////////////////////////
-/// @notice This contract creates jusfifiers and lawyers, also the modifiers of those.
-/// @dev This contract has all the modifiers.
-
 contract LawyerJusterContract {
-    ///----- ENUMS -----///
     enum AccessLevel {
         None,
         Juster,
         Lawyer,
         Owner
     }
+
     address public owner;
     mapping(address => AccessLevel) public s_accessLevels;
-
-    ///----- LAWYERS VARIABLES -----///
-    address[] public lawyers;
-    mapping(address => Lawyer) public s_lawyers;
 
     struct Lawyer {
         uint licenseNumber;
         string name;
         string jurisdiction;
-        string especiality;
+        string speciality;
         bool isValidated;
     }
 
@@ -37,9 +25,8 @@ contract LawyerJusterContract {
     event LawyerAdded(address lawyer);
     event LawyerRemoved(address lawyer);
 
-    ///----- JUSTERS VARIABLES -----///
-    address[] public justers;
-    mapping(address => Juster) public s_justers;
+    // address[] public lawyers;
+    mapping(address => Lawyer) public s_lawyers;
 
     struct Juster {
         string passportNumber;
@@ -51,91 +38,67 @@ contract LawyerJusterContract {
     event JusterRemoved(address juster);
     event JusterAdded(address juster);
     event JusterCreated(address juster);
-    event JusterValidated(address lawyer);
+    event JusterValidated(address juster);
 
-    ///////////////////////////////////////
-    // ----------- CONSTRUCTOR ----------//
-    ///////////////////////////////////////
+    // address[] public justers;
+    mapping(address => Juster) public s_justers;
+
     constructor() {
         owner = msg.sender;
+        s_accessLevels[owner] = AccessLevel.Owner;
     }
 
-    /////////////////////////////////
-    ///-----MODIFIERS-----///
-    /////////////////////////////////
     modifier onlyOwner() {
         require(msg.sender == owner, "Only owner");
+        _;
+    }
+
+    modifier onlyLawyer() {
+        require(
+            getAccessLevel(msg.sender) == AccessLevel.Lawyer,
+            "Only lawyer"
+        );
+        _;
+    }
+
+    modifier onlyJuster() {
+        require(
+            getAccessLevel(msg.sender) == AccessLevel.Juster,
+            "Only Juster"
+        );
         _;
     }
 
     function getAccessLevel(
         address account
     ) internal view returns (AccessLevel) {
-        if (account == owner) {
-            return AccessLevel.Owner;
-        } else if (isLawyer(account)) {
-            return AccessLevel.Lawyer;
-        } else if (isJuster(account)) {
-            return AccessLevel.Juster;
-        } else {
-            return AccessLevel.None;
-        }
-    }
-
-    modifier onlyLawyer() {
-        require(
-            getAccessLevel(msg.sender) == AccessLevel.Lawyer,
-            "Solo abogado"
-        );
-        _;
+        return s_accessLevels[account];
     }
 
     function isLawyer(address _lawyerAddress) internal view returns (bool) {
-        for (uint i = 0; i < lawyers.length; i++) {
-            if (lawyers[i] == _lawyerAddress) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    modifier onlyJuster() {
-        require(
-            getAccessLevel(msg.sender) == AccessLevel.Juster,
-            "Solo Juster"
-        );
-        _;
+        return s_accessLevels[_lawyerAddress] == AccessLevel.Lawyer;
     }
 
     function isJuster(address _justerAddress) internal view returns (bool) {
-        for (uint i = 0; i < justers.length; i++) {
-            if (justers[i] == _justerAddress) {
-                return true;
-            }
-        }
-        return false;
+        return s_accessLevels[_justerAddress] == AccessLevel.Juster;
     }
 
-    /////////////////////////////////
-    ///-----LAWYER FUNCTIONS -----///
-    /////////////////////////////////
-    function delLawyer(address _lawyerAdress) public onlyOwner {
-        s_accessLevels[_lawyerAdress] = AccessLevel.None;
-        s_lawyers[_lawyerAdress].isValidated = true;
-
-        emit LawyerRemoved(_lawyerAdress);
+    function delLawyer(address _lawyerAddress) public onlyOwner {
+        s_accessLevels[_lawyerAddress] = AccessLevel.None;
+        s_lawyers[_lawyerAddress].isValidated = false;
+        emit LawyerRemoved(_lawyerAddress);
     }
 
-    function addLawyer(address _lawyerAdress) private onlyOwner {
-        s_accessLevels[_lawyerAdress] = AccessLevel.Lawyer;
-        emit LawyerAdded(_lawyerAdress);
+    function addLawyer(address _lawyerAddress) public onlyOwner {
+        s_accessLevels[_lawyerAddress] = AccessLevel.Lawyer;
+        emit LawyerAdded(_lawyerAddress);
     }
 
     function createLawyer(
         uint _licenseNumber,
         string memory _name,
         string memory _jurisdiction,
-        string memory _especiality
+        string memory _speciality
     ) public {
         require(!s_lawyers[msg.sender].isValidated, "Lawyer already exists");
 
@@ -143,7 +106,7 @@ contract LawyerJusterContract {
             licenseNumber: _licenseNumber,
             name: _name,
             jurisdiction: _jurisdiction,
-            especiality: _especiality,
+            speciality: _speciality,
             isValidated: false
         });
 
@@ -151,23 +114,17 @@ contract LawyerJusterContract {
         emit LawyerCreated(msg.sender);
     }
 
-    function validateLawyer(address _lawyerAdress) public onlyOwner {
+    function validateLawyer(address _lawyerAddress) public onlyOwner {
+        // require(isLawyer(_lawyerAddress), "Not a lawyer");
         require(
-            !s_lawyers[_lawyerAdress].isValidated,
+            !s_lawyers[_lawyerAddress].isValidated,
             "Lawyer is already validated"
         );
-
-        s_lawyers[_lawyerAdress].isValidated = true;
-
-        s_accessLevels[_lawyerAdress] = AccessLevel.Lawyer;
-        emit LawyerValidated(_lawyerAdress);
+        s_accessLevels[_lawyerAddress] = AccessLevel.Lawyer;
+        s_lawyers[_lawyerAddress].isValidated = true;
+        emit LawyerValidated(_lawyerAddress);
     }
 
-    ///Need to make a functions taht return all lawyers addressess
-
-    /////////////////////////////////
-    //-----JUSTERS FUNCTIONS -----//
-    /////////////////////////////////
     function createJuster(
         string memory _passportNumber,
         string memory _name,
@@ -186,15 +143,14 @@ contract LawyerJusterContract {
         emit JusterCreated(msg.sender);
     }
 
-    function validateJuster(address _justerAdress) public onlyLawyer {
+    function validateJuster(address _justerAddress) public onlyLawyer {
         require(
-            !s_justers[_justerAdress].isValidated,
+            !s_justers[_justerAddress].isValidated,
             "Juster is already validated"
         );
 
-        s_justers[_justerAdress].isValidated = true;
-
-        s_accessLevels[_justerAdress] = AccessLevel.Juster;
-        emit JusterValidated(_justerAdress);
+        s_justers[_justerAddress].isValidated = true;
+        s_accessLevels[_justerAddress] = AccessLevel.Juster;
+        emit JusterValidated(_justerAddress);
     }
 }

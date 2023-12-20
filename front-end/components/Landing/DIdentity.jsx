@@ -38,7 +38,7 @@ export default function DIdentity() {
             color="#000575"
             onClick={handleMetaLog}
           >
-            Create DID
+            I am a Lawyer
           </Button>
         </Flex>
       </Flex>
