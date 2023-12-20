@@ -5,12 +5,10 @@ import { Image, Flex, Heading, Text, Box, Button } from "@chakra-ui/react";
 export default function Juster() {
   return (
     <Box align={"center"}>
-      <Heading>Are you a Lawyer?</Heading>
-      <Flex direction={"column"}>
-        <Text>Requirements:</Text>
-        <Text>Lawyer Degree</Text>
-        <Text>Web 3 Enthusiast</Text>
-      </Flex>
+      <Heading>
+        Get Funded! <br /> & Take Legal Action
+      </Heading>
+      <Flex direction={"column"}></Flex>
       <CreateJuster />
       <CreateCase />
     </Box>

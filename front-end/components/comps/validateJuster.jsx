@@ -22,11 +22,9 @@ const contractABIMumbai = require("../../utils/contractABIMumbai.json");
 
 export default function ValidateJuster() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [licenseNumber, setLicenseNumber] = useState("");
-  const [name, setName] = useState("");
-  const [location, setLocation] = useState("");
+  const [address, setAddress] = useState("");
 
-  const createJuster = async (licenseNumber, name, location) => {
+  const validateJuster = async (address) => {
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
@@ -35,11 +33,7 @@ export default function ValidateJuster() {
         contractABIMumbai,
         signer
       );
-      const transaction = await contract.createJuster(
-        licenseNumber,
-        name,
-        location
-      );
+      const transaction = await contract.validateJuster(address);
       console.log("transaction", transaction);
       const receipt = await transaction.wait();
       const transactionHash = receipt.transactionHash;
@@ -49,16 +43,16 @@ export default function ValidateJuster() {
     }
   };
 
-  const handlecreateJuster = async () => {
-    if (licenseNumber && name && location) {
-      createJuster(licenseNumber, name, location);
+  const handleValidateJuster = async () => {
+    if (address) {
+      validateJuster(address);
     } else {
-      console.log("Por favor, complete todos los campos requeridos.");
+      console.log("Please complete all the requirement fields");
     }
   };
   return (
     <>
-      <Button onClick={onOpen}>Create My DID</Button>
+      <Button onClick={onOpen}>Validate Juster</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalContent bgColor={"#969696"}>
@@ -92,32 +86,17 @@ export default function ValidateJuster() {
             </Heading>
             <Text>Need an Id to validate</Text>
 
-            <form onSubmit={handlecreateJuster}>
+            <form onSubmit={handleValidateJuster}>
               <Flex align={"center"} justify={"center"} direction={"column"}>
                 <FormControl p="1rem" pb="0" isRequired>
-                  <FormLabel textAlign="center">License Number</FormLabel>
+                  <FormLabel textAlign="center">Juster Address</FormLabel>
                   <Input
-                    placeholder="License Number"
-                    value={licenseNumber}
-                    onChange={(e) => setLicenseNumber(e.target.value)}
+                    placeholder="Juster Addressr"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
                   />
                 </FormControl>
-                <FormControl p="1rem" pb="0" isRequired>
-                  <FormLabel textAlign="center">Name</FormLabel>
-                  <Input
-                    placeholder="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </FormControl>
-                <FormControl p="1rem" pb="0" isRequired>
-                  <FormLabel textAlign="center">Location</FormLabel>
-                  <Input
-                    placeholder="Location"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                  />
-                </FormControl>
+
                 <Stack spacing={6} direction={["column", "row"]}></Stack>
               </Flex>
             </form>
@@ -131,9 +110,9 @@ export default function ValidateJuster() {
               _hover={{
                 bg: "black",
               }}
-              onClick={handlecreateJuster}
+              onClick={handleValidateJuster}
             >
-              Create Lawyer
+              Validate Juster
             </Button>
           </ModalFooter>
         </ModalContent>
