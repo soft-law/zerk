@@ -37,6 +37,10 @@ module.exports = {
       url: alchemyApiKey,
       accounts: [privateKey],
     },
+    rotam: {
+      url: "wss://fraa-dancebox-3020-rpc.a.dancebox.tanssi.network",
+      accounts: [privateKey],
+    },
   },
   etherscan: {
     apiKey: etherscanApiKey,
