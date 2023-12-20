@@ -4,18 +4,13 @@ import {
   Tab,
   TabPanels,
   TabPanel,
-  Image,
   Flex,
-  Heading,
-  Text,
-  Box,
-  Button,
 } from "@chakra-ui/react";
 import HeadDash from "../comps/HeadDash";
 import LegalVerificator from "./Lawyer";
 import { useEVMWalletContext } from "../../context/EVMWallet";
 import Juster from "./Juster";
-import Investor from "./Investor";
+import Donator from "./Donator";
 export default function Dashboard() {
   const styleTabList = {
     mt: "7rem",
@@ -40,7 +35,7 @@ export default function Dashboard() {
             <HeadDash sx={styleTabList} />
             <Tab sx={styleTabList}>Justers</Tab>
             <Tab sx={styleTabList}>Lawyers</Tab>
-            <Tab sx={styleTabList}>Investors</Tab>
+            <Tab sx={styleTabList}>Donators</Tab>
           </Flex>
         </TabList>
         <TabPanels>
@@ -51,7 +46,7 @@ export default function Dashboard() {
             <LegalVerificator />
           </TabPanel>
           <TabPanel>
-            <Investor />
+            <Donator />
           </TabPanel>
         </TabPanels>
       </Tabs>

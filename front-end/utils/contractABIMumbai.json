@@ -12,6 +12,63 @@
         "internalType": "address",
         "name": "juster",
         "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "caseNumber",
+        "type": "uint256"
+      }
+    ],
+    "name": "CaseCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "caseNumber",
+        "type": "uint256"
+      }
+    ],
+    "name": "CaseValidated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "donor",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "caseNumber",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "DonationReceived",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "juster",
+        "type": "address"
       }
     ],
     "name": "JusterAdded",
@@ -49,7 +106,7 @@
       {
         "indexed": false,
         "internalType": "address",
-        "name": "lawyer",
+        "name": "juster",
         "type": "address"
       }
     ],
@@ -111,6 +168,47 @@
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "_lawyerAddress",
+        "type": "address"
+      }
+    ],
+    "name": "addLawyer",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_caseNumber",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_jurisdiction",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_price",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_description",
+        "type": "string"
+      }
+    ],
+    "name": "createCase",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "string",
         "name": "_passportNumber",
         "type": "string"
@@ -150,7 +248,7 @@
       },
       {
         "internalType": "string",
-        "name": "_especiality",
+        "name": "_speciality",
         "type": "string"
       }
     ],
@@ -163,7 +261,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_lawyerAdress",
+        "name": "_lawyerAddress",
         "type": "address"
       }
     ],
@@ -176,38 +274,13 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "",
+        "name": "_caseNumber",
         "type": "uint256"
       }
     ],
-    "name": "justers",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "lawyers",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
+    "name": "donateToCase",
+    "outputs": [],
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -237,6 +310,50 @@
         "internalType": "enum LawyerJusterContract.AccessLevel",
         "name": "",
         "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "s_cases",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "caseNumber",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "jurisdiction",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "description",
+        "type": "string"
+      },
+      {
+        "internalType": "bool",
+        "name": "isValidated",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalDonations",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -303,7 +420,7 @@
       },
       {
         "internalType": "string",
-        "name": "especiality",
+        "name": "speciality",
         "type": "string"
       },
       {
@@ -318,8 +435,40 @@
   {
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "s_usedCaseNumbers",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_caseNumber",
+        "type": "uint256"
+      }
+    ],
+    "name": "validateCase",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
-        "name": "_justerAdress",
+        "name": "_justerAddress",
         "type": "address"
       }
     ],
@@ -332,7 +481,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_lawyerAdress",
+        "name": "_lawyerAddress",
         "type": "address"
       }
     ],
