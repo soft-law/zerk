@@ -198,13 +198,13 @@ contract LawyerJusterContract {
         emit CaseValidated(_caseNumber);
     }
 
-    function donateToCase(uint _caseNumber, uint _amount) public payable {
+    function donateToCase(uint _caseNumber) public payable {
         require(s_usedCaseNumbers[_caseNumber], "Case number does not exist");
         require(s_cases[_caseNumber].isValidated, "Case is not validated");
 
-        require(_amount > 0 && _amount <= msg.value, "Invalid donation amount");
+        require(msg.value > 1, "Invalid donation amount");
 
-        s_cases[_caseNumber].totalDonations += _amount;
-        emit DonationReceived(msg.sender, _caseNumber, _amount);
+        s_cases[_caseNumber].totalDonations += msg.value;
+        emit DonationReceived(msg.sender, _caseNumber, msg.value);
     }
 }
