@@ -25,7 +25,6 @@ contract LawyerJusterContract {
     event LawyerAdded(address lawyer);
     event LawyerRemoved(address lawyer);
 
-    // address[] public lawyers;
     mapping(address => Lawyer) public s_lawyers;
 
     struct Juster {
@@ -40,8 +39,23 @@ contract LawyerJusterContract {
     event JusterCreated(address juster);
     event JusterValidated(address juster);
 
-    // address[] public justers;
     mapping(address => Juster) public s_justers;
+
+    struct Case {
+        uint caseNumber;
+        string jurisdiction;
+        uint price;
+        string description;
+        bool isValidated;
+        uint totalDonations;
+    }
+
+    event CaseCreated(address juster, uint caseNumber);
+    event CaseValidated(uint caseNumber);
+    event DonationReceived(address donor, uint caseNumber, uint amount);
+
+    mapping(uint => bool) public s_usedCaseNumbers;
+    mapping(uint => Case) public s_cases;
 
     constructor() {
         owner = msg.sender;
@@ -115,7 +129,6 @@ contract LawyerJusterContract {
     }
 
     function validateLawyer(address _lawyerAddress) public onlyOwner {
-        // require(isLawyer(_lawyerAddress), "Not a lawyer");
         require(
             !s_lawyers[_lawyerAddress].isValidated,
             "Lawyer is already validated"
@@ -152,5 +165,46 @@ contract LawyerJusterContract {
         s_justers[_justerAddress].isValidated = true;
         s_accessLevels[_justerAddress] = AccessLevel.Juster;
         emit JusterValidated(_justerAddress);
+    }
+
+    function createCase(
+        uint _caseNumber,
+        string memory _jurisdiction,
+        uint _price,
+        string memory _description
+    ) public onlyJuster {
+        require(!s_usedCaseNumbers[_caseNumber], "Case number already used");
+
+        Case memory newCase = Case({
+            caseNumber: _caseNumber,
+            jurisdiction: _jurisdiction,
+            price: _price,
+            description: _description,
+            isValidated: false,
+            totalDonations: 0
+        });
+
+        s_usedCaseNumbers[_caseNumber] = true;
+        s_cases[_caseNumber] = newCase;
+
+        emit CaseCreated(msg.sender, _caseNumber);
+    }
+
+    function validateCase(uint _caseNumber) public onlyLawyer {
+        require(s_usedCaseNumbers[_caseNumber], "Case number does not exist");
+        require(!s_cases[_caseNumber].isValidated, "Case is already validated");
+
+        s_cases[_caseNumber].isValidated = true;
+        emit CaseValidated(_caseNumber);
+    }
+
+    function donateToCase(uint _caseNumber, uint _amount) public payable {
+        require(s_usedCaseNumbers[_caseNumber], "Case number does not exist");
+        require(s_cases[_caseNumber].isValidated, "Case is not validated");
+
+        require(_amount > 0 && _amount <= msg.value, "Invalid donation amount");
+
+        s_cases[_caseNumber].totalDonations += _amount;
+        emit DonationReceived(msg.sender, _caseNumber, _amount);
     }
 }
