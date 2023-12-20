@@ -23,10 +23,10 @@ export default function Dashboard() {
     fontSize: "xl",
   };
 
-  const { ConnectEVMWallet } = useEVMWalletContext();
+  const { createLawyer } = useEVMWalletContext();
 
   const handleConnectWallet = () => {
-    ConnectEVMWallet();
+    createLawyer();
   };
 
   return (
@@ -52,7 +52,6 @@ export default function Dashboard() {
               <Flex>
                 <Image w="10rem" src={"contracts.svg"} />
                 <Box>
-                  <Text>Hola</Text>
                   <Button onClick={handleConnectWallet}>
                     {" "}
                     I want to be a Legal Validator

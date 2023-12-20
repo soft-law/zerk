@@ -13,7 +13,7 @@ import {
   Image,
   Flex,
 } from "@chakra-ui/react";
-import Verificators from "./Verificator";
+import Verificators from "./Juster";
 export default function Dashboard() {
   const styleTabList = {
     mt: "7rem",
@@ -30,16 +30,16 @@ export default function Dashboard() {
         <TabList>
           <Flex bgColor="Black" direction="column">
             <HeadDash sx={styleTabList} />
-            <Tab sx={styleTabList}>Funding Cases</Tab>
             <Tab sx={styleTabList}>Descentralized Identity</Tab>
+            <Tab sx={styleTabList}>Get Funded!</Tab>
           </Flex>
         </TabList>
         <TabPanels>
           <TabPanel>
-            <Funding />
+            <Verificators />
           </TabPanel>
           <TabPanel>
-            <Verificators />
+            <Funding />
           </TabPanel>
         </TabPanels>
       </Tabs>

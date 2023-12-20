@@ -2,36 +2,105 @@
 
 import { createContext, useContext } from "react";
 import { ethers } from "ethers";
+import { MumbaiContract, RotamContract } from "../requireEnviromentVariables";
+const contractABIMumbai = require("../utils//contractABIMumbai.json");
 
 const EVMWalletContext = createContext({});
 
 export const EVMWalletContexttProvider = ({ children }) => {
+  const createJuster = async () => {
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(
+        MumbaiContract,
+        contractABIMumbai,
+        signer
+      );
+      const transaction = await contract.createJuster(12345, "Mario", "Mexico");
+      console.log("transaction", transaction);
+      const receipt = await transaction.wait();
+      const transactionHash = receipt.transactionHash;
+      console.log(transactionHash);
+    } catch (error) {
+      console.log(`Error: ${error}`);
+    }
+  };
+  const createCase = async () => {
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(
+        MumbaiContract,
+        contractABIMumbai,
+        signer
+      );
+      const transaction = await contract.createCase(
+        12345,
+        "Mexico",
+        1,
+        "Criminal Case"
+      );
+      console.log("transaction", transaction);
+      const receipt = await transaction.wait();
+      const transactionHash = receipt.transactionHash;
+      console.log(transactionHash);
+    } catch (error) {
+      console.log(`Error: ${error}`);
+    }
+  };
+
+  const createLawyer = async () => {
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(
+        MumbaiContract,
+        contractABIMumbai,
+        signer
+      );
+      const transaction = await contract.createLawyer(
+        12345,
+        "Mario",
+        "Meico",
+        "Criminal"
+      );
+      console.log("transaction", transaction);
+      const receipt = await transaction.wait();
+      const transactionHash = receipt.transactionHash;
+      console.log(transactionHash);
+    } catch (error) {
+      console.log(`Error: ${error}`);
+    }
+  };
   const ConnectEVMWallet = async () => {
-    let signer = null;
-
-    let provider;
-    if (window.ethereum == null) {
-      // If MetaMask is not installed, we use the default provider,
-      // which is backed by a variety of third-party services (such
-      // as INFURA). They do not have private keys installed,
-      // so they only have read-only access
-      console.log("MetaMask not installed; using read-only defaults");
-      provider = ethers.getDefaultProvider();
-    } else {
-      // Connect to the MetaMask EIP-1193 object. This is a standard
-      // protocol that allows Ethers access to make all read-only
-      // requests through MetaMask.
-      provider = new ethers.BrowserProvider(window.ethereum);
-
-      // It also provides an opportunity to request access to write
-      // operations, which will be performed by the private key
-      // that MetaMask manages for the user.
-      signer = await provider.getSigner();
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(
+        MumbaiContract,
+        contractABIMumbai,
+        signer
+      );
+      const transaction = await contract.createLawyer(
+        12345,
+        "Mario",
+        "Meico",
+        "Criminal"
+      );
+      console.log("transaction", transaction);
+      const receipt = await transaction.wait();
+      const transactionHash = receipt.transactionHash;
+      console.log(transactionHash);
+    } catch (error) {
+      console.log(`Error: ${error}`);
     }
   };
 
   return (
-    <EVMWalletContext.Provider value={{ ConnectEVMWallet }}>
+    <EVMWalletContext.Provider
+      value={{ createLawyer, createCase, createJuster }}
+    >
       {children}
     </EVMWalletContext.Provider>
   );

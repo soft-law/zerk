@@ -9,10 +9,10 @@ import { useEVMWalletContext } from "../../context/EVMWallet";
 const Header = () => {
   const router = useRouter();
   const { connectTanssi } = usePolkadotJSContext();
-  const { ConnectEVMWallet } = useEVMWalletContext();
+  // const { ConnectEVMWallet } = useEVMWalletContext();
 
   const handleConnection = () => {
-    ConnectEVMWallet();
+    // ConnectEVMWallet();
     router.push("/Dashboard");
   };
 
