@@ -8,7 +8,6 @@ import {
 } from "@chakra-ui/react";
 import HeadDash from "../comps/HeadDash";
 import LegalVerificator from "./Lawyer";
-
 import Juster from "./Juster";
 import Donator from "./Donator";
 export default function Dashboard() {
@@ -18,12 +17,6 @@ export default function Dashboard() {
     ml: "1rem",
     mr: "1rem",
     fontSize: "xl",
-  };
-
-  // const { createLawyer } = useEVMWalletContext();
-
-  const handleConnectWallet = () => {
-    createLawyer();
   };
 
   return (
@@ -58,8 +51,6 @@ export default function Dashboard() {
           </TabPanel>
         </TabPanels>
       </Tabs>
-
-      {/* <Footer /> */}
     </>
   );
 }

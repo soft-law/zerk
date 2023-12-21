@@ -35,7 +35,6 @@ export default function DonateToCase() {
         signer
       );
       const transaction = await contract.donateToCase(caseNumber, {
-        // Convert value to wei
         value: ethers.utils.parseEther(value.toString()),
       });
       console.log("transaction", transaction);

@@ -51,6 +51,17 @@ export default function Team() {
           <Text fontSize="1.5rem">Nagra Rohit</Text>
           <Text>Solidity Dev.</Text>
         </Box>
+        <Box align="center" m="5">
+          <Image
+            src={
+              "https://copper-ready-guanaco-464.mypinata.cloud/ipfs/QmTmNoxRw8XqgQ3h7Ypt53HxcPGybozZUugZwdxWFsPGCw?_gl=1*1upszaj*_ga*MTM1ODQ0MTgxMi4xNjk2NzkyMjEz*_ga_5RMPXG14TE*MTcwMzEzOTExNC40Ny4xLjE3MDMxMzkxMjUuNDkuMC4w"
+            }
+            sx={profileImage}
+            alt="Ivan profile pic"
+          />
+          <Text fontSize="1.5rem">Iván Terratek</Text>
+          <Text>Digital Artist</Text>
+        </Box>
       </Flex>
     </Flex>
   );

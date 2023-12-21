@@ -1,6 +1,6 @@
 import CreateCase from "../comps/createCase";
 import CreateJuster from "../comps/createJuster";
-import { Image, Flex, Heading, Text, Box, Button } from "@chakra-ui/react";
+import { Flex, Heading, Box } from "@chakra-ui/react";
 
 export default function Juster() {
   return (

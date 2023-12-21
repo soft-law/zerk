@@ -1,47 +1,19 @@
 "use client";
 
-import { ReactNode } from "react";
 import {
   Box,
   Container,
   Stack,
   SimpleGrid,
   Text,
-  VisuallyHidden,
-  chakra,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FaTwitter, FaYoutube, FaInstagram } from "react-icons/fa";
-
-// import { AppStoreBadge } from '#/components/AppStoreBadge'
-// import { PlayStoreBadge } from '#/components/PlayStoreBadge'
 
 export default function Contact() {
   const ListHeader = () => {
     return <Text fontWeight={"500"} fontSize={"lg"} mb={2}></Text>;
   };
-  // const SocialButton = () => {
-  //   return (
-  //     <chakra.button
-  //       bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
-  //       rounded={'full'}
-  //       w={8}
-  //       h={8}
-  //       cursor={'pointer'}
-  //       as={'a'}
-  //       // href={href}
-  //       display={'inline-flex'}
-  //       alignItems={'center'}
-  //       justifyContent={'center'}
-  //       transition={'background 0.3s ease'}
-  //       _hover={{
-  //         bg: useColorModeValue('blackAlpha.200', 'whiteAlpha.200'),
-  //       }}>
-  //       <VisuallyHidden></VisuallyHidden>
-
-  //     </chakra.button>
-  //   )
-  // }
   return (
     <Box
       bg={useColorModeValue("gray.50", "gray.900")}
@@ -97,8 +69,6 @@ export default function Contact() {
 
           <Stack align={"flex-start"}>
             <ListHeader>Install App</ListHeader>
-            {/* <AppStoreBadge />
-            <PlayStoreBadge /> */}
           </Stack>
         </SimpleGrid>
       </Container>
@@ -117,7 +87,7 @@ export default function Contact() {
           justify={{ md: "space-between" }}
           align={{ md: "center" }}
         >
-          <Text>© 2022 Chakra Templates. All rights reserved</Text>
+          <Text>© 2023 Softlaw S.A. de C.V. All rights reserved</Text>
           <Stack direction={"row"} spacing={6}>
             <FaTwitter />
 
