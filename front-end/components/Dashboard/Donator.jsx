@@ -1,5 +1,6 @@
 import { Flex, Heading, Text, Box } from "@chakra-ui/react";
-import DonateToCase from "../comps/donate";
+import DonateToCase from "../comps/donateFunds";
+// import DonateToCase from "../comps/donateFunds";
 
 export default function LegalVerificator() {
   return (

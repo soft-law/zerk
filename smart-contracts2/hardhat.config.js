@@ -2,7 +2,7 @@ require("@nomicfoundation/hardhat-verify");
 require("@nomicfoundation/hardhat-ethers");
 require("@nomicfoundation/hardhat-toolbox");
 
-const { privateKey, alchemyApiKey, etherscanApiKey } = require("./secrets.js"); // Make sure to create this file and add your private key, Infura API key, and Etherscan API key
+const { privateKey } = require("./secrets.js"); // Make sure to create this file and add your private key, Infura API key, and Etherscan API key
 
 const SOLC_SETTINGS = {
   // evmVersion: "london",
@@ -33,16 +33,9 @@ module.exports = {
     ],
   },
   networks: {
-    mumbai: {
-      url: alchemyApiKey,
-      accounts: [privateKey],
-    },
     rotam: {
       url: "https://fraa-dancebox-3020-rpc.a.dancebox.tanssi.network",
       accounts: [privateKey],
     },
-  },
-  etherscan: {
-    apiKey: etherscanApiKey,
   },
 };

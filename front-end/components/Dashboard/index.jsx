@@ -10,6 +10,7 @@ import HeadDash from "../comps/HeadDash";
 import LegalVerificator from "./Lawyer";
 import Juster from "./Juster";
 import Donator from "./Donator";
+import Admin from "./Admin";
 export default function Dashboard() {
   const styleTabList = {
     mt: "7rem",
@@ -21,7 +22,6 @@ export default function Dashboard() {
 
   return (
     <>
-      {/* <Simple /> */}
       <Tabs
         isManual
         variant="none"
@@ -37,6 +37,7 @@ export default function Dashboard() {
             <Tab sx={styleTabList}>Justers</Tab>
             <Tab sx={styleTabList}>Lawyers</Tab>
             <Tab sx={styleTabList}>Donators</Tab>
+            <Tab sx={styleTabList}>Admin</Tab>
           </Flex>
         </TabList>
         <TabPanels>
@@ -48,6 +49,9 @@ export default function Dashboard() {
           </TabPanel>
           <TabPanel>
             <Donator />
+          </TabPanel>
+          <TabPanel>
+            <Admin />
           </TabPanel>
         </TabPanels>
       </Tabs>
