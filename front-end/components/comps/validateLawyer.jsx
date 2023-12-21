@@ -58,7 +58,15 @@ export default function ValidateLawyer() {
   };
   return (
     <>
-      <Button onClick={onOpen}>Create My DID</Button>
+      <Button
+        bgColor="transparent"
+        border="1px"
+        borderColor="#ADFF00"
+        color="#808080"
+        onClick={onOpen}
+      >
+        Create My DID
+      </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalContent bgColor={"#969696"}>

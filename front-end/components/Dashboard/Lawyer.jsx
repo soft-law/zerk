@@ -5,14 +5,15 @@ import ValidateJuster from "../comps/validateJuster";
 
 export default function Investor() {
   return (
-    <Box align={"center"}>
-      <Heading>
+    <Box p="2rem" align={"center"} bgColor="transparent">
+      <Heading p="10rem">
         Are you a Lawyer? <br /> Validate Cases & Earn Money
       </Heading>
-
-      <CreateLawyer />
-      <ValidateCase />
-      <ValidateJuster />
+      <Flex mt="2rem" justify="space-around">
+        <CreateLawyer />
+        <ValidateCase />
+        <ValidateJuster />
+      </Flex>
     </Box>
   );
 }

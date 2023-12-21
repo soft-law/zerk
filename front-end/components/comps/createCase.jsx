@@ -59,7 +59,15 @@ export default function CreateCase() {
   };
   return (
     <>
-      <Button onClick={onOpen}>Create A Case</Button>
+      <Button
+        bgColor="transparent"
+        border="1px"
+        borderColor="#ADFF00"
+        color="#808080"
+        onClick={onOpen}
+      >
+        Create A Case
+      </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalContent bgColor={"#969696"}>

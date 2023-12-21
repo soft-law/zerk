@@ -25,15 +25,25 @@ export default function Hero() {
     ),
   });
   return (
-    <Container maxW={"3xl"}>
+    <Container maxW="100vw" bgImage="abstract Grey.svg">
       <Stack
         as={Box}
         textAlign={"center"}
         spacing={{ base: 8, md: 14 }}
         py={{ base: 20, md: 36 }}
+        bgColor="transparent"
       >
-        <Image alignSelf={"center"} w={"8rem"} src="zerk idea Z.svg"></Image>
-        <Image src="https://copper-ready-guanaco-464.mypinata.cloud/ipfs/Qme8enSnWxsWox2b5eu2x8iM3pCyt3UWCk1q7a8DH4qG3m?_gl=1*1rvcetu*_ga*MTM1ODQ0MTgxMi4xNjk2NzkyMjEz*_ga_5RMPXG14TE*MTcwMzA5NjIxNC40Ni4xLjE3MDMwOTYyNDYuMjguMC4w" />
+        {/* <Image
+          bgColor="transparent"
+          alignSelf={"center"}
+          w={"8rem"}
+          src="zerk idea Z.svg"
+        ></Image> */}
+        <Image
+          alignSelf={"center"}
+          w="25rem"
+          src="https://copper-ready-guanaco-464.mypinata.cloud/ipfs/Qme8enSnWxsWox2b5eu2x8iM3pCyt3UWCk1q7a8DH4qG3m?_gl=1*1rvcetu*_ga*MTM1ODQ0MTgxMi4xNjk2NzkyMjEz*_ga_5RMPXG14TE*MTcwMzA5NjIxNC40Ni4xLjE3MDMwOTYyNDYuMjguMC4w"
+        />
         <Heading
           fontWeight={600}
           fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
@@ -65,19 +75,19 @@ export default function Hero() {
           >
             Get Started
           </Button>
-          <Button variant={"link"} colorScheme={"blue"} size={"sm"}>
+          <Button variant={"link"} color="#808080" size={"sm"}>
             Learn more
           </Button>
           <Box>
-            <Icon
+            {/* <Icon
               as={Arrow}
               color={useColorModeValue("gray.800", "gray.300")}
               w={71}
               position={"absolute"}
               right={-71}
               top={"10px"}
-            />
-            <Text
+            /> */}
+            {/* <Text
               fontSize={"lg"}
               fontFamily={"Caveat"}
               position={"absolute"}
@@ -86,7 +96,7 @@ export default function Hero() {
               transform={"rotate(10deg)"}
             >
               Starting at $15/mo
-            </Text>
+            </Text> */}
           </Box>
         </Stack>
       </Stack>

@@ -57,7 +57,15 @@ export default function ValidateCase() {
   };
   return (
     <>
-      <Button onClick={onOpen}>Validate Cases</Button>
+      <Button
+        bgColor="transparent"
+        border="1px"
+        borderColor="#ADFF00"
+        color="#808080"
+        onClick={onOpen}
+      >
+        Validate Cases
+      </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalContent bgColor={"#969696"}>
