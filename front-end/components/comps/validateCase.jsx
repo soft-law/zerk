@@ -27,9 +27,8 @@ export default function ValidateCase() {
 
   const createJuster = async (licenseNumber, name, location) => {
     try {
-      const provider = new ethers.providers.WebSocketProvider(
-        " wss://fraa-dancebox-3020-rpc.a.dancebox.tanssi.network"
-      );
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      await window.ethereum.request({ method: "eth_requestAccounts" });
       const signer = provider.getSigner();
       const contract = new ethers.Contract(
         RotamContract,

@@ -26,6 +26,7 @@ export default function ValidateLawyer() {
   const validateLawyer = async (address) => {
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
+      await window.ethereum.request({ method: "eth_requestAccounts" });
       const signer = provider.getSigner();
       const contract = new ethers.Contract(
         RotamContract,
