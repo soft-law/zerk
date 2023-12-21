@@ -33,17 +33,17 @@ export default function Hero() {
         py={{ base: 20, md: 36 }}
         bgColor="transparent"
       >
-        {/* <Image
+        <Image
           bgColor="transparent"
           alignSelf={"center"}
           w={"8rem"}
           src="zerk idea Z.svg"
-        ></Image> */}
-        <Image
+        ></Image>
+        {/* <Image
           alignSelf={"center"}
           w="25rem"
           src="https://copper-ready-guanaco-464.mypinata.cloud/ipfs/Qme8enSnWxsWox2b5eu2x8iM3pCyt3UWCk1q7a8DH4qG3m?_gl=1*1rvcetu*_ga*MTM1ODQ0MTgxMi4xNjk2NzkyMjEz*_ga_5RMPXG14TE*MTcwMzA5NjIxNC40Ni4xLjE3MDMwOTYyNDYuMjguMC4w"
-        />
+        /> */}
         <Heading
           fontWeight={600}
           fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
