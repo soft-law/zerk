@@ -1,6 +1,7 @@
 import CreateLawyer from "../comps/createLawyer";
 import { Flex, Heading, Text, Box } from "@chakra-ui/react";
 import DonateToCase from "../comps/donate";
+import ValidateLawyer from "../comps/validateLawyer";
 
 export default function LegalVerificator() {
   return (

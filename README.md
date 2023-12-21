@@ -1,6 +1,6 @@
-# Zerk - RWA AppChain
+# Zerk - Legal Crowfunding
 
-Zerk is a project focusing on RWA (Real World Asset) AppChain technology.
+Zerk is a project focusing on Crowfunding Donations for Legal Cases.
 
 ## Installation
 
@@ -26,4 +26,3 @@ Is important to follow a series of steps to be organized between ourselves:
 Please adhere to code style guidelines (Install Prettier to ensure this) and ever run `git pull origin main` before the creation of the PR and later push the changes again to skip conflicts with other developers.
 
 ### And please, never push directly into the main branch by skipping the PR and code review!
-

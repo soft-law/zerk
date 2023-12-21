@@ -15,31 +15,27 @@ import {
   Modal,
   Input,
 } from "@chakra-ui/react";
-
 import { ethers } from "ethers";
-import { MumbaiContract } from "../../requireEnviromentVariables";
-const contractABIMumbai = require("../../utils/contractABIMumbai.json");
+import {
+  MumbaiContract,
+  RotamContract,
+} from "../../requireEnviromentVariables";
+const contractABIrotam = require("../../utils/contractABIrotam.json");
 
 export default function ValidateLawyer() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [licenseNumber, setLicenseNumber] = useState("");
-  const [name, setName] = useState("");
-  const [location, setLocation] = useState("");
+  const [address, setAddress] = useState("");
 
-  const createJuster = async (licenseNumber, name, location) => {
+  const validateLawyer = async (address) => {
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
       const contract = new ethers.Contract(
-        MumbaiContract,
-        contractABIMumbai,
+        RotamContract,
+        contractABIrotam,
         signer
       );
-      const transaction = await contract.createJuster(
-        licenseNumber,
-        name,
-        location
-      );
+      const transaction = await contract.validateLawyer(address);
       console.log("transaction", transaction);
       const receipt = await transaction.wait();
       const transactionHash = receipt.transactionHash;
@@ -49,11 +45,11 @@ export default function ValidateLawyer() {
     }
   };
 
-  const handlecreateJuster = async () => {
-    if (licenseNumber && name && location) {
-      createJuster(licenseNumber, name, location);
+  const handlevalidateLawyer = async () => {
+    if (address) {
+      validateLawyer(address);
     } else {
-      console.log("Por favor, complete todos los campos requeridos.");
+      console.log("Please fullfill all the requirement fields");
     }
   };
   return (
@@ -90,7 +86,7 @@ export default function ValidateLawyer() {
               textAlign="center"
               bgColor="black"
             >
-              Be a Juster!
+              Validate a Lawyer!
             </Heading>
           </Flex>
 
@@ -100,32 +96,17 @@ export default function ValidateLawyer() {
             </Heading>
             <Text>Need an Id to validate</Text>
 
-            <form onSubmit={handlecreateJuster}>
+            <form onSubmit={handlevalidateLawyer}>
               <Flex align={"center"} justify={"center"} direction={"column"}>
                 <FormControl p="1rem" pb="0" isRequired>
-                  <FormLabel textAlign="center">License Number</FormLabel>
+                  <FormLabel textAlign="center"> Lawyer Address</FormLabel>
                   <Input
-                    placeholder="License Number"
-                    value={licenseNumber}
-                    onChange={(e) => setLicenseNumber(e.target.value)}
+                    placeholder="Lawyer Address"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
                   />
                 </FormControl>
-                <FormControl p="1rem" pb="0" isRequired>
-                  <FormLabel textAlign="center">Name</FormLabel>
-                  <Input
-                    placeholder="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </FormControl>
-                <FormControl p="1rem" pb="0" isRequired>
-                  <FormLabel textAlign="center">Location</FormLabel>
-                  <Input
-                    placeholder="Location"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                  />
-                </FormControl>
+
                 <Stack spacing={6} direction={["column", "row"]}></Stack>
               </Flex>
             </form>
@@ -139,9 +120,9 @@ export default function ValidateLawyer() {
               _hover={{
                 bg: "black",
               }}
-              onClick={handlecreateJuster}
+              onClick={handlevalidateLawyer}
             >
-              Create Lawyer
+              Validate Lawyer
             </Button>
           </ModalFooter>
         </ModalContent>
