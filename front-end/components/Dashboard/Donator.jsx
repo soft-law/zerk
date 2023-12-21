@@ -1,8 +1,7 @@
-import { Flex, Heading, Text, Box } from "@chakra-ui/react";
+import { Flex, Heading, Box } from "@chakra-ui/react";
 import DonateToCase from "../comps/donateFunds";
-// import DonateToCase from "../comps/donateFunds";
 
-export default function LegalVerificator() {
+export default function Donator() {
   return (
     <Box align={"center"} p="2rem">
       <Heading mt="10rem">Donate Your $RTM</Heading>
