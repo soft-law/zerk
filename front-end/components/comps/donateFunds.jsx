@@ -16,11 +16,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { ethers } from "ethers";
-import {
-  MumbaiContract,
-  RotamContract,
-} from "../../requireEnviromentVariables";
-const contractABIMumbai = require("../../utils/contractABIMumbai.json");
+import { RotamContract } from "../../requireEnviromentVariables";
 const contractABIrotam = require("../../utils/contractABIrotam.json");
 
 export default function DonateToCase() {
@@ -31,6 +27,7 @@ export default function DonateToCase() {
   const donateToCase = async (caseNumber, value) => {
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
+      await window.ethereum.request({ method: "eth_requestAccounts" });
       const signer = provider.getSigner();
       const contract = new ethers.Contract(
         RotamContract,
@@ -38,7 +35,6 @@ export default function DonateToCase() {
         signer
       );
       const transaction = await contract.donateToCase(caseNumber, {
-        // Convert value to wei
         value: ethers.utils.parseEther(value.toString()),
       });
       console.log("transaction", transaction);

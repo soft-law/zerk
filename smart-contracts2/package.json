@@ -1,5 +1,5 @@
 {
-  "name": "hardhat-project",
+  "name": "zerk",
   "dependencies": {},
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",

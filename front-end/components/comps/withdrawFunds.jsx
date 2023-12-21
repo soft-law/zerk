@@ -4,6 +4,7 @@ import {
   ModalFooter,
   Button,
   Flex,
+  Text,
   Heading,
   Stack,
   FormControl,
@@ -18,11 +19,11 @@ import { ethers } from "ethers";
 import { RotamContract } from "../../requireEnviromentVariables";
 const contractABIrotam = require("../../utils/contractABIrotam.json");
 
-export default function ValidateLawyer() {
+export default function WithdrawFunds() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [address, setAddress] = useState("");
+  const [caseNumber, setCaseNumber] = useState("");
 
-  const validateLawyer = async (address) => {
+  const withdawFunds = async (caseNumber) => {
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       await window.ethereum.request({ method: "eth_requestAccounts" });
@@ -32,7 +33,7 @@ export default function ValidateLawyer() {
         contractABIrotam,
         signer
       );
-      const transaction = await contract.validateLawyer(address);
+      const transaction = await contract.withdawFunds(caseNumber);
       console.log("transaction", transaction);
       const receipt = await transaction.wait();
       const transactionHash = receipt.transactionHash;
@@ -42,9 +43,9 @@ export default function ValidateLawyer() {
     }
   };
 
-  const handlevalidateLawyer = async () => {
-    if (address) {
-      validateLawyer(address);
+  const handlewithdawFunds = async () => {
+    if (caseNumber) {
+      withdawFunds(caseNumber);
     } else {
       console.log("Please fullfill all the requirement fields");
     }
@@ -58,7 +59,7 @@ export default function ValidateLawyer() {
         color="#808080"
         onClick={onOpen}
       >
-        Validate Lawyer
+        Withdraw Funds
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -83,22 +84,23 @@ export default function ValidateLawyer() {
               textAlign="center"
               bgColor="black"
             >
-              Validate a Lawyer!
+              Withdraw the case funds!
             </Heading>
           </Flex>
 
           <ModalBody>
             <Heading fontSize="1.2rem" textAlign="center" m="4">
-              Need address of the lawyer
+              Wait for the validation of your Identity <br />& Get Funded
             </Heading>
+            <Text>Need an Id to validate</Text>
 
-            <form onSubmit={handlevalidateLawyer}>
+            <form onSubmit={handlewithdawFunds}>
               <Flex align={"center"} justify={"center"} direction={"column"}>
                 <FormControl p="1rem" pb="0" isRequired>
-                  <FormLabel textAlign="center"> Lawyer Address</FormLabel>
+                  <FormLabel textAlign="center"> Withdraw Funds</FormLabel>
                   <Input
-                    placeholder="Lawyer Address"
-                    value={address}
+                    placeholder="Withdraw funds"
+                    value={caseNumber}
                     onChange={(e) => setAddress(e.target.value)}
                   />
                 </FormControl>
@@ -116,9 +118,9 @@ export default function ValidateLawyer() {
               _hover={{
                 bg: "black",
               }}
-              onClick={handlevalidateLawyer}
+              onClick={handlewithdawFunds}
             >
-              Validate Lawyer
+              Withdraw funds
             </Button>
           </ModalFooter>
         </ModalContent>

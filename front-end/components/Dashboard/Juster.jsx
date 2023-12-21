@@ -1,6 +1,8 @@
 import CreateCase from "../comps/createCase";
 import CreateJuster from "../comps/createJuster";
-import { Image, Flex, Heading, Text, Box, Button } from "@chakra-ui/react";
+import { Flex, Heading, Box } from "@chakra-ui/react";
+import WithdrawFunds from "../comps/withdrawFunds";
+import CardCase from "../comps/cardCase";
 
 export default function Juster() {
   return (
@@ -12,6 +14,8 @@ export default function Juster() {
         <Flex mt="2rem" p="2rem" justify="space-around">
           <CreateJuster />
           <CreateCase />
+          <WithdrawFunds />
+          <CardCase />
         </Flex>
       </Flex>
     </Box>

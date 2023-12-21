@@ -16,11 +16,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { ethers } from "ethers";
-import {
-  MumbaiContract,
-  RotamContract,
-} from "../../requireEnviromentVariables";
-const contractABIMumbai = require("../../utils/contractABIMumbai.json");
+import { RotamContract } from "../../requireEnviromentVariables";
 const contractABIrotam = require("../../utils/contractABIrotam.json");
 
 export default function CreateCase() {
@@ -33,6 +29,7 @@ export default function CreateCase() {
   const createCase = async (caseNumber, jurisdiction, price, description) => {
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
+      await window.ethereum.request({ method: "eth_requestAccounts" });
       const signer = provider.getSigner();
       const contract = new ethers.Contract(
         RotamContract,

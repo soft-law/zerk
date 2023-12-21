@@ -1,7 +1,8 @@
-import { Image, Flex, Heading, Text, Box, Button } from "@chakra-ui/react";
+import { Flex, Heading, Box } from "@chakra-ui/react";
 import CreateLawyer from "../comps/createLawyer";
 import ValidateCase from "../comps/validateCase";
 import ValidateJuster from "../comps/validateJuster";
+import ValidateLawyer from "../comps/validateLawyer";
 
 export default function Investor() {
   return (
@@ -13,6 +14,7 @@ export default function Investor() {
         <CreateLawyer />
         <ValidateCase />
         <ValidateJuster />
+        <ValidateLawyer />
       </Flex>
     </Box>
   );

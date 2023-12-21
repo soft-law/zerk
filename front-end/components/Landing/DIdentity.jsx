@@ -7,7 +7,7 @@ export default function DIdentity() {
   const router = useRouter();
 
   const handleMetaLog = () => {
-    router.push("/DID");
+    router.push("/Dashboard");
   };
   return (
     <Flex

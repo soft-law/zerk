@@ -17,8 +17,6 @@ contract ZerkLawyerJuster {
 
     address public owner;
     mapping(address => AccessLevel) public s_accessLevels;
-
-    // New state variable to track completed cases
     mapping(uint => bool) public s_completedCases;
 
     struct Lawyer {

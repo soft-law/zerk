@@ -8,9 +8,9 @@ import {
 } from "@chakra-ui/react";
 import HeadDash from "../comps/HeadDash";
 import LegalVerificator from "./Lawyer";
-import { useEVMWalletContext } from "../../context/EVMWallet";
 import Juster from "./Juster";
 import Donator from "./Donator";
+import Admin from "./Admin";
 export default function Dashboard() {
   const styleTabList = {
     mt: "7rem",
@@ -20,15 +20,8 @@ export default function Dashboard() {
     fontSize: "xl",
   };
 
-  const { createLawyer } = useEVMWalletContext();
-
-  const handleConnectWallet = () => {
-    createLawyer();
-  };
-
   return (
     <>
-      {/* <Simple /> */}
       <Tabs
         isManual
         variant="none"
@@ -44,6 +37,7 @@ export default function Dashboard() {
             <Tab sx={styleTabList}>Justers</Tab>
             <Tab sx={styleTabList}>Lawyers</Tab>
             <Tab sx={styleTabList}>Donators</Tab>
+            <Tab sx={styleTabList}>Admin</Tab>
           </Flex>
         </TabList>
         <TabPanels>
@@ -56,10 +50,11 @@ export default function Dashboard() {
           <TabPanel>
             <Donator />
           </TabPanel>
+          <TabPanel>
+            <Admin />
+          </TabPanel>
         </TabPanels>
       </Tabs>
-
-      {/* <Footer /> */}
     </>
   );
 }

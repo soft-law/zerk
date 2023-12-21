@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Heading, Image, Flex, Text, Spacer } from "@chakra-ui/react";
+import { Box, Heading, Image, Flex, Text } from "@chakra-ui/react";
 
 export default function UseCases() {
   const styleContratos = {
@@ -21,31 +21,7 @@ export default function UseCases() {
           <Image src="criminal.svg" />
           <Text>Criminal.</Text>
         </Box>
-        {/* <Box sx={styleContratos}>
-          <Image src={"Pacto_Socios.svg"} />
-          <Text>Commodities.</Text>
-        </Box>
-        <Box sx={styleContratos}>
-          <Image src={"jelwery.svg"} />
-          <Text>Jelwery.</Text>
-        </Box> */}
       </Flex>
-      {/* <Flex>
-        <Spacer />
-        <Box sx={styleContratos}>
-          <Image src={"art.svg"} />
-          <Text>Fine Art.</Text>
-        </Box>
-        <Box sx={styleContratos}>
-          <Image src={"loans.svg"} />
-          <Text>Loans.</Text>
-        </Box>
-        <Box sx={styleContratos}>
-          <Image src={"contracts.svg"} />
-          <Text>Contracts.</Text>
-        </Box>
-        <Spacer />
-      </Flex> */}
     </Box>
   );
 }
