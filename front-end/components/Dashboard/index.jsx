@@ -20,7 +20,7 @@ export default function Dashboard() {
     fontSize: "xl",
   };
 
-  const { createLawyer } = useEVMWalletContext();
+  // const { createLawyer } = useEVMWalletContext();
 
   const handleConnectWallet = () => {
     createLawyer();
