@@ -35,4 +35,4 @@ https://zerk-legal-action-crowfunding.gitbook.io/untitled/~/changes/qoMpGugpv4Uj
 
 ### PRODUCTION LINK
 
-https://vercel.com/softlaw-zerk/zerk/uu12VmXzijTKcoYmkcQS73YRrdqe
+https://zerk-alpha.vercel.app/

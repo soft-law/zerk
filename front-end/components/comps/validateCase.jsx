@@ -21,11 +21,9 @@ const contractABIrotam = require("../../utils/contractABIrotam.json");
 
 export default function ValidateCase() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [licenseNumber, setLicenseNumber] = useState("");
-  const [name, setName] = useState("");
-  const [location, setLocation] = useState("");
+  const [casse, setCasseNumber] = useState("");
 
-  const createJuster = async (licenseNumber, name, location) => {
+  const validateCase = async (casse) => {
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       await window.ethereum.request({ method: "eth_requestAccounts" });
@@ -35,11 +33,7 @@ export default function ValidateCase() {
         contractABIrotam,
         signer
       );
-      const transaction = await contract.createJuster(
-        licenseNumber,
-        name,
-        location
-      );
+      const transaction = await contract.validateCase(casse);
       console.log("transaction", transaction);
       const receipt = await transaction.wait();
       const transactionHash = receipt.transactionHash;
@@ -49,11 +43,11 @@ export default function ValidateCase() {
     }
   };
 
-  const handlecreateJuster = async () => {
-    if (licenseNumber && name && location) {
-      createJuster(licenseNumber, name, location);
+  const handleValidateCase = async () => {
+    if (casse) {
+      createJuster(casse);
     } else {
-      console.log("Por favor, complete todos los campos requeridos.");
+      console.log("Please full fill all requirement fields.");
     }
   };
   return (
@@ -90,36 +84,19 @@ export default function ValidateCase() {
               textAlign="center"
               bgColor="black"
             >
-              Be a Juster!
+              Are u a Lawyer?
             </Heading>
           </Flex>
 
           <ModalBody>
             <Heading fontSize="1.2rem" textAlign="center" m="4">
-              Wait for the validation of your Identity <br />& Get Funded
+              Validaste Cases and win coins
             </Heading>
-            <Text>Need an Id to validate</Text>
 
-            <form onSubmit={handlecreateJuster}>
+            <form onSubmit={handleValidateCase}>
               <Flex align={"center"} justify={"center"} direction={"column"}>
                 <FormControl p="1rem" pb="0" isRequired>
-                  <FormLabel textAlign="center">License Number</FormLabel>
-                  <Input
-                    placeholder="License Number"
-                    value={licenseNumber}
-                    onChange={(e) => setLicenseNumber(e.target.value)}
-                  />
-                </FormControl>
-                <FormControl p="1rem" pb="0" isRequired>
-                  <FormLabel textAlign="center">Name</FormLabel>
-                  <Input
-                    placeholder="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </FormControl>
-                <FormControl p="1rem" pb="0" isRequired>
-                  <FormLabel textAlign="center">Location</FormLabel>
+                  <FormLabel textAlign="center">Case Number</FormLabel>
                   <Input
                     placeholder="Location"
                     value={location}
@@ -139,9 +116,9 @@ export default function ValidateCase() {
               _hover={{
                 bg: "black",
               }}
-              onClick={handlecreateJuster}
+              onClick={handleValidateCase}
             >
-              Create Lawyer
+              Validate Case
             </Button>
           </ModalFooter>
         </ModalContent>
