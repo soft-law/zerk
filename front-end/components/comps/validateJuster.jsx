@@ -17,11 +17,7 @@ import {
 } from "@chakra-ui/react";
 
 import { ethers } from "ethers";
-import {
-  MumbaiContract,
-  RotamContract,
-} from "../../requireEnviromentVariables";
-const contractABIMumbai = require("../../utils/contractABIMumbai.json");
+import { RotamContract } from "../../requireEnviromentVariables";
 const contractABIrotam = require("../../utils/contractABIrotam.json");
 
 export default function ValidateJuster() {

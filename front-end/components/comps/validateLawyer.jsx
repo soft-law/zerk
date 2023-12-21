@@ -16,10 +16,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { ethers } from "ethers";
-import {
-  MumbaiContract,
-  RotamContract,
-} from "../../requireEnviromentVariables";
+import { RotamContract } from "../../requireEnviromentVariables";
 const contractABIrotam = require("../../utils/contractABIrotam.json");
 
 export default function ValidateLawyer() {

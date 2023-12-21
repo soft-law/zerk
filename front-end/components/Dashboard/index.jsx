@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import HeadDash from "../comps/HeadDash";
 import LegalVerificator from "./Lawyer";
-import { useEVMWalletContext } from "../../context/EVMWallet";
+
 import Juster from "./Juster";
 import Donator from "./Donator";
 export default function Dashboard() {

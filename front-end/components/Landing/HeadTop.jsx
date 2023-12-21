@@ -4,15 +4,12 @@
 import { Flex, Button, Heading } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { usePolkadotJSContext } from "../../context/PolkadotJS";
-import { useEVMWalletContext } from "../../context/EVMWallet";
 
 const Header = () => {
   const router = useRouter();
   const { connectTanssi } = usePolkadotJSContext();
-  // const { ConnectEVMWallet } = useEVMWalletContext();
 
   const handleConnection = () => {
-    // ConnectEVMWallet();
     router.push("/Dashboard");
   };
 
