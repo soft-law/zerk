@@ -109,9 +109,7 @@ contract ZerkLawyerJuster {
      * @param account The address to query the access level.
      * @return The access level of the account.
      */
-    function getAccessLevel(
-        address account
-    ) internal view returns (AccessLevel) {
+    function getAccessLevel(address account) public view returns (AccessLevel) {
         return s_accessLevels[account];
     }
 
