@@ -33,6 +33,12 @@ https://zerk-legal-action-crowfunding.gitbook.io/untitled/~/changes/qoMpGugpv4Uj
 
 ### PROJECT VIDEO PRESENTATION:
 
+https://youtu.be/RWovc3MwFkk
+
 ### PRODUCTION LINK
 
 https://zerk-alpha.vercel.app/
+
+### PRIVATE KEY DEPLOYER OF SMART CONTRACT
+
+839a0d70a304c1614d50858e536194be5bfab2cdd33475df92e9e9a495dead4b
