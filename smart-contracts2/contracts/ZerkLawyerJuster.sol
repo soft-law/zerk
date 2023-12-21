@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LawyerJusterContract {
+contract ZerkLawyerJuster {
     enum AccessLevel {
         None,
         Juster,
@@ -11,6 +11,9 @@ contract LawyerJusterContract {
 
     address public owner;
     mapping(address => AccessLevel) public s_accessLevels;
+
+    // New state variable to track completed cases
+    mapping(uint => bool) public s_completedCases;
 
     struct Lawyer {
         uint licenseNumber;
@@ -48,6 +51,8 @@ contract LawyerJusterContract {
         string description;
         bool isValidated;
         uint totalDonations;
+        address justerAddress;
+        bool isFunded;
     }
 
     event CaseCreated(address juster, uint caseNumber);
@@ -181,11 +186,13 @@ contract LawyerJusterContract {
             price: _price,
             description: _description,
             isValidated: false,
-            totalDonations: 0
+            totalDonations: 0,
+            justerAddress: msg.sender,
+            isFunded: false
         });
 
-        s_usedCaseNumbers[_caseNumber] = true;
         s_cases[_caseNumber] = newCase;
+        s_usedCaseNumbers[_caseNumber] = true;
 
         emit CaseCreated(msg.sender, _caseNumber);
     }
@@ -198,13 +205,60 @@ contract LawyerJusterContract {
         emit CaseValidated(_caseNumber);
     }
 
-    function donateToCase(uint _caseNumber) public payable {
+    function donateToCase(uint _caseNumber) public payable returns (bool) {
         require(s_usedCaseNumbers[_caseNumber], "Case number does not exist");
         require(s_cases[_caseNumber].isValidated, "Case is not validated");
 
-        require(msg.value > 1, "Invalid donation amount");
+        uint remainingAmount = s_cases[_caseNumber].price -
+            s_cases[_caseNumber].totalDonations;
 
-        s_cases[_caseNumber].totalDonations += msg.value;
-        emit DonationReceived(msg.sender, _caseNumber, msg.value);
+        // change value msg.sender to ether
+        uint donationAmountInWei = msg.value;
+        uint donationAmountInEther = donationAmountInWei / 1 ether;
+
+        require(
+            donationAmountInEther > 0 &&
+                donationAmountInEther <= remainingAmount,
+            "Invalid donation amount"
+        );
+        emit DonationReceived(msg.sender, _caseNumber, donationAmountInEther);
+
+        s_cases[_caseNumber].totalDonations += donationAmountInEther;
+
+        if (s_cases[_caseNumber].totalDonations >= s_cases[_caseNumber].price) {
+            // Mark the case as funded
+            s_completedCases[_caseNumber] = true;
+        }
+
+        if (s_cases[_caseNumber].totalDonations >= s_cases[_caseNumber].price) {
+            // Mark the case as funded inside case struct
+            s_cases[_caseNumber].isFunded = true;
+        }
+
+        return true;
+    }
+
+    function withdrawFunds(uint _caseNumber) public onlyJuster returns (bool) {
+        require(s_completedCases[_caseNumber], "Case is not fully funded");
+
+        // Ensure the Juster's address is valid before transferring funds
+        require(
+            msg.sender == s_cases[_caseNumber].justerAddress,
+            "Only assigned Juster can withdraw funds"
+        );
+
+        payable(s_cases[_caseNumber].justerAddress).transfer(
+            s_cases[_caseNumber].totalDonations * 1 ether
+        );
+
+        // Remove the case from active cases
+        s_usedCaseNumbers[_caseNumber] = false;
+
+        // Return true indicating successful withdrawal
+        return true;
+    }
+
+    function getCompletedCases(uint _caseNumber) public view returns (bool) {
+        return s_completedCases[_caseNumber];
     }
 }
