@@ -15,10 +15,13 @@ import {
   Modal,
   Input,
 } from "@chakra-ui/react";
-
 import { ethers } from "ethers";
-import { MumbaiContract } from "../../requireEnviromentVariables";
+import {
+  MumbaiContract,
+  RotamContract,
+} from "../../requireEnviromentVariables";
 const contractABIMumbai = require("../../utils/contractABIMumbai.json");
+const contractABIrotam = require("../../utils/contractABIrotam.json");
 
 export default function ValidateLawyer() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -31,8 +34,8 @@ export default function ValidateLawyer() {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
       const contract = new ethers.Contract(
-        MumbaiContract,
-        contractABIMumbai,
+        RotamContract,
+        contractABIrotam,
         signer
       );
       const transaction = await contract.createJuster(
