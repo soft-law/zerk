@@ -14,12 +14,19 @@ const Header = () => {
   };
 
   return (
-    <Flex color="#05D5FB" justify="space-between" align="center" h="10vh" p={4}>
+    <Flex
+      bgColor="Black"
+      color="#05D5FB"
+      justify="space-between"
+      align="center"
+      h="10vh"
+      p={4}
+    >
       <Heading>Zerk</Heading>
-      <Button bgColor="#05D5FB" color="#000575" onClick={handleConnection}>
+      <Button bgColor="transparent" color="#808080" onClick={handleConnection}>
         Login
       </Button>
-      <Button bgColor="#05D5FB" color="#000575" onClick={connectTanssi}>
+      <Button bgColor="transparent" color="#808080" onClick={connectTanssi}>
         Pallet Call
       </Button>
     </Flex>

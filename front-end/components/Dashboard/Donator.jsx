@@ -5,11 +5,12 @@ import ValidateLawyer from "../comps/validateLawyer";
 
 export default function LegalVerificator() {
   return (
-    <Box align={"center"}>
-      <Heading>Donate Your $RTM</Heading>
+    <Box align={"center"} p="2rem">
+      <Heading mt="10rem">Donate Your $RTM</Heading>
       <Heading>Be a Justice Donator</Heading>
-      <DonateToCase />
-      <ValidateLawyer />
+      <Flex justify="center" mt="2rem">
+        <DonateToCase />
+      </Flex>
     </Box>
   );
 }

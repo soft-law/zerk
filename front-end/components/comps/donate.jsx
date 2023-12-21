@@ -55,7 +55,15 @@ export default function DonateToCase() {
   };
   return (
     <>
-      <Button onClick={onOpen}>Donate to Legal Action</Button>
+      <Button
+        bgColor="transparent"
+        border="1px"
+        borderColor="#ADFF00"
+        color="#808080"
+        onClick={onOpen}
+      >
+        Donate to Legal Action
+      </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalContent bgColor={"#969696"}>

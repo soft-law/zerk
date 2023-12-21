@@ -10,7 +10,13 @@ export default function Team() {
   };
 
   return (
-    <Flex h="50vh" direction="column" justify={"center"} align="center">
+    <Flex
+      h="50vh"
+      direction="column"
+      justify={"center"}
+      align="center"
+      bgImage="abstract Grey.svg"
+    >
       <Heading>Team</Heading>
       <Flex>
         <Box align="center" m="5">

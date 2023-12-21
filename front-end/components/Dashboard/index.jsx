@@ -29,7 +29,15 @@ export default function Dashboard() {
   return (
     <>
       {/* <Simple /> */}
-      <Tabs isManual variant="none" orientation="vertical" isFitted>
+      <Tabs
+        isManual
+        variant="none"
+        orientation="vertical"
+        isFitted
+        bgImage="section2.svg"
+        bgSize="cover"
+        bgRepeat="no-repeat"
+      >
         <TabList>
           <Flex bgColor="Black" direction="column">
             <HeadDash sx={styleTabList} />
