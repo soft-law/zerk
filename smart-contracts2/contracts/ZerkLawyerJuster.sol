@@ -1,7 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+/**
+ * @title ZerkLawyerJuster
+ * @dev A smart contract for managing legal cases, lawyers, and justers with donation functionality.
+ * @author Soft-law Team.
+ */
 contract ZerkLawyerJuster {
+    // Access levels for users
     enum AccessLevel {
         None,
         Juster,
@@ -62,16 +68,25 @@ contract ZerkLawyerJuster {
     mapping(uint => bool) public s_usedCaseNumbers;
     mapping(uint => Case) public s_cases;
 
+    /**
+     * @dev Contract constructor, sets the contract owner.
+     */
     constructor() {
         owner = msg.sender;
         s_accessLevels[owner] = AccessLevel.Owner;
     }
 
+    /**
+     * @dev Modifier to restrict function access to the contract owner.
+     */
     modifier onlyOwner() {
         require(msg.sender == owner, "Only owner");
         _;
     }
 
+    /**
+     * @dev Modifier to restrict function access to lawyers only.
+     */
     modifier onlyLawyer() {
         require(
             getAccessLevel(msg.sender) == AccessLevel.Lawyer,
@@ -80,6 +95,9 @@ contract ZerkLawyerJuster {
         _;
     }
 
+    /**
+     * @dev Modifier to restrict function access to justers only.
+     */
     modifier onlyJuster() {
         require(
             getAccessLevel(msg.sender) == AccessLevel.Juster,
@@ -88,31 +106,61 @@ contract ZerkLawyerJuster {
         _;
     }
 
+    /**
+     * @dev Gets the access level of an account.
+     * @param account The address to query the access level.
+     * @return The access level of the account.
+     */
     function getAccessLevel(
         address account
     ) internal view returns (AccessLevel) {
         return s_accessLevels[account];
     }
 
+    /**
+     * @dev Checks if an address belongs to a lawyer.
+     * @param _lawyerAddress The address to check.
+     * @return A boolean indicating whether the address belongs to a lawyer.
+     */
     function isLawyer(address _lawyerAddress) internal view returns (bool) {
         return s_accessLevels[_lawyerAddress] == AccessLevel.Lawyer;
     }
 
+    /**
+     * @dev Checks if an address belongs to a juster.
+     * @param _justerAddress The address to check.
+     * @return A boolean indicating whether the address belongs to a juster.
+     */
     function isJuster(address _justerAddress) internal view returns (bool) {
         return s_accessLevels[_justerAddress] == AccessLevel.Juster;
     }
 
+    /**
+     * @dev Removes a lawyer from the system.
+     * @param _lawyerAddress The address of the lawyer to be removed.
+     */
     function delLawyer(address _lawyerAddress) public onlyOwner {
         s_accessLevels[_lawyerAddress] = AccessLevel.None;
         s_lawyers[_lawyerAddress].isValidated = false;
         emit LawyerRemoved(_lawyerAddress);
     }
 
+    /**
+     * @dev Adds a lawyer to the system.
+     * @param _lawyerAddress The address of the lawyer to be added.
+     */
     function addLawyer(address _lawyerAddress) public onlyOwner {
         s_accessLevels[_lawyerAddress] = AccessLevel.Lawyer;
         emit LawyerAdded(_lawyerAddress);
     }
 
+    /**
+     * @dev Creates a new lawyer in the system.
+     * @param _licenseNumber The license number of the lawyer.
+     * @param _name The name of the lawyer.
+     * @param _jurisdiction The jurisdiction of the lawyer.
+     * @param _speciality The speciality of the lawyer.
+     */
     function createLawyer(
         uint _licenseNumber,
         string memory _name,
@@ -133,6 +181,10 @@ contract ZerkLawyerJuster {
         emit LawyerCreated(msg.sender);
     }
 
+    /**
+     * @dev Validates a lawyer, granting them access rights.
+     * @param _lawyerAddress The address of the lawyer to be validated.
+     */
     function validateLawyer(address _lawyerAddress) public onlyOwner {
         require(
             !s_lawyers[_lawyerAddress].isValidated,
@@ -143,6 +195,12 @@ contract ZerkLawyerJuster {
         emit LawyerValidated(_lawyerAddress);
     }
 
+    /**
+     * @dev Creates a new juster in the system.
+     * @param _passportNumber The passport number of the juster.
+     * @param _name The name of the juster.
+     * @param _jurisdiction The jurisdiction of the juster.
+     */
     function createJuster(
         string memory _passportNumber,
         string memory _name,
@@ -161,6 +219,10 @@ contract ZerkLawyerJuster {
         emit JusterCreated(msg.sender);
     }
 
+    /**
+     * @dev Validates a juster, granting them access rights.
+     * @param _justerAddress The address of the juster to be validated.
+     */
     function validateJuster(address _justerAddress) public onlyLawyer {
         require(
             !s_justers[_justerAddress].isValidated,
@@ -172,6 +234,13 @@ contract ZerkLawyerJuster {
         emit JusterValidated(_justerAddress);
     }
 
+    /**
+     * @dev Creates a new legal case in the system.
+     * @param _caseNumber The number of the legal case.
+     * @param _jurisdiction The jurisdiction of the legal case.
+     * @param _price The price of the legal case.
+     * @param _description The description of the legal case.
+     */
     function createCase(
         uint _caseNumber,
         string memory _jurisdiction,
@@ -197,6 +266,10 @@ contract ZerkLawyerJuster {
         emit CaseCreated(msg.sender, _caseNumber);
     }
 
+    /**
+     * @dev Validates a legal case, granting it access rights.
+     * @param _caseNumber The number of the legal case to be validated.
+     */
     function validateCase(uint _caseNumber) public onlyLawyer {
         require(s_usedCaseNumbers[_caseNumber], "Case number does not exist");
         require(!s_cases[_caseNumber].isValidated, "Case is already validated");
@@ -205,6 +278,10 @@ contract ZerkLawyerJuster {
         emit CaseValidated(_caseNumber);
     }
 
+    /**
+     * @dev Allows a donor to contribute funds to a legal case.
+     * @param _caseNumber The number of the legal case to receive the donation.
+     */
     function donateToCase(uint _caseNumber) public payable returns (bool) {
         require(s_usedCaseNumbers[_caseNumber], "Case number does not exist");
         require(s_cases[_caseNumber].isValidated, "Case is not validated");
@@ -212,7 +289,7 @@ contract ZerkLawyerJuster {
         uint remainingAmount = s_cases[_caseNumber].price -
             s_cases[_caseNumber].totalDonations;
 
-        // change value msg.sender to ether
+        // Convert donation amount to ether
         uint donationAmountInWei = msg.value;
         uint donationAmountInEther = donationAmountInWei / 1 ether;
 
@@ -238,6 +315,10 @@ contract ZerkLawyerJuster {
         return true;
     }
 
+    /**
+     * @dev Allows the assigned juster to withdraw funds from a fully funded legal case.
+     * @param _caseNumber The number of the legal case to withdraw funds from.
+     */
     function withdrawFunds(uint _caseNumber) public onlyJuster returns (bool) {
         require(s_completedCases[_caseNumber], "Case is not fully funded");
 
@@ -258,6 +339,11 @@ contract ZerkLawyerJuster {
         return true;
     }
 
+    /**
+     * @dev Gets the completion status of a legal case.
+     * @param _caseNumber The number of the legal case.
+     * @return A boolean indicating whether the case is completed (fully funded).
+     */
     function getCompletedCases(uint _caseNumber) public view returns (bool) {
         return s_completedCases[_caseNumber];
     }
