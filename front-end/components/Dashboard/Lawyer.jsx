@@ -2,9 +2,8 @@ import { Flex, Heading, Box } from "@chakra-ui/react";
 import CreateLawyer from "../comps/createLawyer";
 import ValidateCase from "../comps/validateCase";
 import ValidateJuster from "../comps/validateJuster";
-import ValidateLawyer from "../comps/validateLawyer";
 
-export default function Investor() {
+export default function LegalVerificator() {
   return (
     <Box p="2rem" align={"center"} bgColor="transparent">
       <Heading p="10rem">
@@ -14,7 +13,6 @@ export default function Investor() {
         <CreateLawyer />
         <ValidateCase />
         <ValidateJuster />
-        <ValidateLawyer />
       </Flex>
     </Box>
   );
