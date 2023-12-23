@@ -97,11 +97,11 @@ export default function WithdrawFunds() {
             <form onSubmit={handlewithdawFunds}>
               <Flex align={"center"} justify={"center"} direction={"column"}>
                 <FormControl p="1rem" pb="0" isRequired>
-                  <FormLabel textAlign="center"> Withdraw Funds</FormLabel>
+                  <FormLabel textAlign="center"> Case Number</FormLabel>
                   <Input
                     placeholder="Withdraw funds"
                     value={caseNumber}
-                    onChange={(e) => setAddress(e.target.value)}
+                    onChange={(e) => setCaseNumber(e.target.value)}
                   />
                 </FormControl>
 
