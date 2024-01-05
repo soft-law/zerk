@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Spinner } from "@chakra-ui/react";
 import {
   ModalBody,
   ModalFooter,
@@ -14,6 +15,10 @@ import {
   ModalContent,
   Modal,
   Input,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
 } from "@chakra-ui/react";
 
 import { ethers } from "ethers";
@@ -26,6 +31,11 @@ export default function CreateLawyer() {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [especiality, setEspeciality] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  // const provider = new ethers.providers.Web3Provider(window.ethereum);
 
   const createLawyer = async (licenseNumber, name, location, especiality) => {
     try {
@@ -44,9 +54,13 @@ export default function CreateLawyer() {
         especiality
       );
       console.log("transaction", transaction);
+      setLoading(true);
       const receipt = await transaction.wait();
       const transactionHash = receipt.transactionHash;
+      //transaction success
       console.log(transactionHash);
+      setLoading(false);
+      setSuccess(true);
     } catch (error) {
       console.log(`Error: ${error}`);
     }
@@ -59,6 +73,35 @@ export default function CreateLawyer() {
       console.log("Please complete all requirements.");
     }
   };
+
+  //CALL CONTRACT DATA
+
+  // const contractAddress =
+  //   "0x4fa3d37934339457d9531ad3c85bd94def66cd9b1b18a85272fdb6e15b26cc6c";
+
+  //instantiate contract
+  //
+  // const incrementer = new ethers.Contract(
+  //   contractAddress,
+  //   contractABIrotam,
+  //   provider
+  // );
+
+  //Get Contract data
+  //
+  // const get = async () => {
+  //   console.log(`Making a call to contract at address: ${contractAddress}`);
+
+  // 6. Call contract
+  //
+  // const data = await incrementer.data.toString();
+
+  //   console.log(`The current number stored is: ${data}`);
+  // };
+
+  // 7. Call get function
+  // get();
+
   return (
     <>
       <Button
@@ -143,18 +186,47 @@ export default function CreateLawyer() {
             </form>
           </ModalBody>
 
-          <ModalFooter justify={"space-arround"}>
-            <Button
-              bg={"grey"}
-              color={"white"}
-              w="full"
-              _hover={{
-                bg: "black",
-              }}
-              onClick={handlecreateLawyer}
-            >
-              Create Lawyer
-            </Button>
+          <ModalFooter justify={"space-arround"} flexDir="column">
+            {success ? (
+              <Alert status="success" variant="solid">
+                <AlertIcon />
+                Data uploaded to the server. Fire on!
+              </Alert>
+            ) : (
+              <>
+                {loading ? (
+                  <>
+                    <Text>Transaction Loading</Text>
+                    <Spinner
+                      thickness="4px"
+                      speed="0.65s"
+                      emptyColor="gray.200"
+                      color="#adff00"
+                      size="xl"
+                    />
+                  </>
+                ) : (
+                  <></>
+                )}
+                {loading ? (
+                  <></>
+                ) : (
+                  <>
+                    <Button
+                      bg={"grey"}
+                      color={"white"}
+                      w="full"
+                      _hover={{
+                        bg: "black",
+                      }}
+                      onClick={handlecreateLawyer}
+                    >
+                      Create Lawyer
+                    </Button>
+                  </>
+                )}
+              </>
+            )}
           </ModalFooter>
         </ModalContent>
       </Modal>
