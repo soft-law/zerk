@@ -19,6 +19,7 @@ const HeadDash = () => {
       align="center"
       p={4}
       bgColor="black"
+      mb="5rem"
     >
       <Button variant="link" onClick={handleConnection} m="2" ml="1rem">
         <Flex direction="column" bgColor="black">
