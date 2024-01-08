@@ -23,7 +23,7 @@ export default function WithdrawFunds() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [caseNumber, setCaseNumber] = useState("");
 
-  const withdawFunds = async (caseNumber) => {
+  const withdrawFunds = async (caseNumber) => {
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       await window.ethereum.request({ method: "eth_requestAccounts" });
@@ -33,7 +33,7 @@ export default function WithdrawFunds() {
         contractABIrotam,
         signer
       );
-      const transaction = await contract.withdawFunds(caseNumber);
+      const transaction = await contract.withdrawFunds(caseNumber);
       console.log("transaction", transaction);
       const receipt = await transaction.wait();
       const transactionHash = receipt.transactionHash;
@@ -43,9 +43,9 @@ export default function WithdrawFunds() {
     }
   };
 
-  const handlewithdawFunds = async () => {
+  const handlewithdrawFunds = async () => {
     if (caseNumber) {
-      withdawFunds(caseNumber);
+      withdrawFunds(caseNumber);
     } else {
       console.log("Please fullfill all the requirement fields");
     }
@@ -94,7 +94,7 @@ export default function WithdrawFunds() {
             </Heading>
             <Text>Need an Id to validate</Text>
 
-            <form onSubmit={handlewithdawFunds}>
+            <form onSubmit={handlewithdrawFunds}>
               <Flex align={"center"} justify={"center"} direction={"column"}>
                 <FormControl p="1rem" pb="0" isRequired>
                   <FormLabel textAlign="center"> Case Number</FormLabel>
@@ -118,7 +118,7 @@ export default function WithdrawFunds() {
               _hover={{
                 bg: "black",
               }}
-              onClick={handlewithdawFunds}
+              onClick={handlewithdrawFunds}
             >
               Withdraw funds
             </Button>
