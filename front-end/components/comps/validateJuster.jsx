@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useToast } from "@chakra-ui/react";
 import {
   ModalBody,
   ModalFooter,
@@ -23,6 +24,7 @@ const contractABIrotam = require("../../utils/contractABIrotam.json");
 export default function ValidateJuster() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [address, setAddress] = useState("");
+  const toast = useToast();
 
   const validateJuster = async (address) => {
     try {
@@ -39,8 +41,37 @@ export default function ValidateJuster() {
       const receipt = await transaction.wait();
       const transactionHash = receipt.transactionHash;
       console.log(transactionHash);
+      toast({
+        title: 'Validate Juster',
+        description: 'Juster is validated & can create case now',
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+        position: 'top-right',
+        
+      });
     } catch (error) {
       console.log(`Error: ${error}`);
+      let errorMessage;
+      if (error.message && error.message.includes('Only lawyer')) {
+        errorMessage = 'Only validated lawyer can validate Justers';
+      }else if (error.message && error.message.includes('user rejected transaction')) {
+        errorMessage = 'User denied the transaction.';
+      }else if(error.message && error.message.includes('Juster is already validated')){
+        errorMessage = 'Juster is already validated';
+
+      } else {
+        errorMessage = `Unexpected error: ${error.message}`;
+      }
+      toast({
+        title: 'Validate Case',
+        description: `Error: ${errorMessage}`,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-left',
+        
+      });
     }
   };
 
@@ -48,7 +79,15 @@ export default function ValidateJuster() {
     if (address) {
       validateJuster(address);
     } else {
-      console.log("Please complete all the requirement fields");
+      toast({
+        title: 'Validate Juster',
+        description: 'Please provide all arguments',
+        status: 'info',
+        duration: 2000,
+        isClosable: true,
+        position: 'top-right',
+        
+      });
     }
   };
   return (

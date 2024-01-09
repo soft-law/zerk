@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useToast } from "@chakra-ui/react";
 import {
   ModalBody,
   ModalFooter,
@@ -22,6 +23,7 @@ const contractABIrotam = require("../../utils/contractABIrotam.json");
 export default function ValidateCase() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [casseNumber, setCasseNumber] = useState("");
+  const toast = useToast();
 
   const validateCase = async (casseNumber) => {
     try {
@@ -38,16 +40,56 @@ export default function ValidateCase() {
       const receipt = await transaction.wait();
       const transactionHash = receipt.transactionHash;
       console.log(transactionHash);
+      toast({
+        title: 'Validate Case',
+        description: 'Case is validated can be funded now',
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+        position: 'top-right',
+        
+      });
     } catch (error) {
       console.log(`Error: ${error}`);
+      let errorMessage;
+      if (error.message && error.message.includes('Only lawyer')) {
+        errorMessage = 'Only validated lawyer can validate cases';
+      }else if (error.message && error.message.includes('Case is already validated')) {
+        errorMessage = 'Case is already validated.';
+      }else if (error.message && error.message.includes('user rejected transaction')) {
+        errorMessage = 'User denied the transaction.';
+      }else if(error.message && error.message.includes('Case number does not exist')){
+        errorMessage = 'Case number does not exist';
+
+      } else {
+        errorMessage = `Unexpected error: ${error.message}`;
+      }
+      toast({
+        title: 'Validate Case',
+        description: `Error: ${errorMessage}`,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-left',
+        
+      });
     }
   };
 
   const handleValidateCase = async () => {
     if (casseNumber) {
       validateCase(casseNumber);
+      
     } else {
-      console.log("Please full fill all requirement fields.");
+      toast({
+        title: 'Validate Case',
+        description: 'Please provide all arguments',
+        status: 'info',
+        duration: 2000,
+        isClosable: true,
+        position: 'top-right',
+        
+      });
     }
   };
   return (
