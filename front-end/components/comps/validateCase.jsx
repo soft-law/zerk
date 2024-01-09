@@ -41,37 +41,43 @@ export default function ValidateCase() {
       const transactionHash = receipt.transactionHash;
       console.log(transactionHash);
       toast({
-        title: 'Validate Case',
-        description: 'Case is validated can be funded now',
-        status: 'success',
+        title: "Validate Case",
+        description: "Case is validated can be funded now",
+        status: "success",
         duration: 2000,
         isClosable: true,
-        position: 'top-right',
-        
+        position: "top-right",
       });
     } catch (error) {
       console.log(`Error: ${error}`);
       let errorMessage;
-      if (error.message && error.message.includes('Only lawyer')) {
-        errorMessage = 'Only validated lawyer can validate cases';
-      }else if (error.message && error.message.includes('Case is already validated')) {
-        errorMessage = 'Case is already validated.';
-      }else if (error.message && error.message.includes('user rejected transaction')) {
-        errorMessage = 'User denied the transaction.';
-      }else if(error.message && error.message.includes('Case number does not exist')){
-        errorMessage = 'Case number does not exist';
-
+      if (error.message && error.message.includes("Only lawyer")) {
+        errorMessage = "Only validated lawyer can validate cases";
+      } else if (
+        error.message &&
+        error.message.includes("Case is already validated")
+      ) {
+        errorMessage = "Case is already validated.";
+      } else if (
+        error.message &&
+        error.message.includes("user rejected transaction")
+      ) {
+        errorMessage = "User denied the transaction.";
+      } else if (
+        error.message &&
+        error.message.includes("Case number does not exist")
+      ) {
+        errorMessage = "Case number does not exist";
       } else {
         errorMessage = `Unexpected error: ${error.message}`;
       }
       toast({
-        title: 'Validate Case',
+        title: "Validate Case",
         description: `Error: ${errorMessage}`,
-        status: 'error',
+        status: "error",
         duration: 3000,
         isClosable: true,
-        position: 'top-left',
-        
+        position: "top-left",
       });
     }
   };
@@ -79,16 +85,14 @@ export default function ValidateCase() {
   const handleValidateCase = async () => {
     if (casseNumber) {
       validateCase(casseNumber);
-      
     } else {
       toast({
-        title: 'Validate Case',
-        description: 'Please provide all arguments',
-        status: 'info',
+        title: "Validate Case",
+        description: "Please provide all arguments",
+        status: "info",
         duration: 2000,
         isClosable: true,
-        position: 'top-right',
-        
+        position: "top-right",
       });
     }
   };
@@ -113,7 +117,7 @@ export default function ValidateCase() {
             borderBottomRadius="3rem"
           >
             <Image
-              src="https://copper-ready-guanaco-464.mypinata.cloud/ipfs/QmSonedE3a6r1zS9ukPYZPCTXqJX6gncwuRrXwFYhMAbU6?_gl=1*1hk0k8b*_ga*MTM1ODQ0MTgxMi4xNjk2NzkyMjEz*_ga_5RMPXG14TE*MTcwMjk2MjQwMC40My4xLjE3MDI5NjI4NTIuNjAuMC4w"
+              src="powertothepeopleno_bg_1_1x.webp"
               alt="Juster Image"
               objectFit={"contain"}
               boxSize={"15rem"}

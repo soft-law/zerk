@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Spinner,useToast } from "@chakra-ui/react";
+import { Spinner, useToast } from "@chakra-ui/react";
 import {
   ModalBody,
   ModalFooter,
@@ -61,51 +61,54 @@ export default function CreateLawyer() {
       //transaction success
       console.log(transactionHash);
       toast({
-        title: 'Create Lawyer',
-        description: 'Lawyer  created successfully',
-        status: 'success',
+        title: "Create Lawyer",
+        description: "Lawyer  created successfully",
+        status: "success",
         duration: 2000,
         isClosable: true,
-        position: 'top-right',
-        
+        position: "top-right",
       });
       setLoading(false);
       setSuccess(true);
     } catch (error) {
       let errorMessage;
-  if (error.message && error.message.includes('user rejected transaction')) {
-    errorMessage = 'User denied the transaction.';
-  }else if (error.message && error.message.includes("Lawyer already exists")){
-    errorMessage =" Lawyer already exists"
-  } else {
-    errorMessage = `Unexpected error: ${error.message}`;
-  }
+      if (
+        error.message &&
+        error.message.includes("user rejected transaction")
+      ) {
+        errorMessage = "User denied the transaction.";
+      } else if (
+        error.message &&
+        error.message.includes("Lawyer already exists")
+      ) {
+        errorMessage = " Lawyer already exists";
+      } else {
+        errorMessage = `Unexpected error: ${error.message}`;
+      }
 
-  toast({
-    title: 'Create Lawyer',
-    description: `Error: ${errorMessage}`,
-    status: 'error',
-    duration: 2000,
-    isClosable: true,
-    position: 'top-right',
-  });
-      console.log(error)
+      toast({
+        title: "Create Lawyer",
+        description: `Error: ${errorMessage}`,
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+        position: "top-right",
+      });
+      console.log(error);
     }
   };
 
   const handlecreateLawyer = async () => {
     if (licenseNumber && name && location && especiality) {
       createLawyer(licenseNumber, name, location, especiality);
-      
     } else {
       toast({
-        title: 'Create Lawyer',
-        description: 'Please provide all arguments',
-        status: 'info',
+        title: "Create Lawyer",
+        description: "Please provide all arguments",
+        status: "info",
         duration: 2000,
         isClosable: true,
-        position: 'top-right',
-        
+        position: "top-right",
       });
     }
   };
@@ -159,7 +162,7 @@ export default function CreateLawyer() {
             borderBottomRadius="3rem"
           >
             <Image
-              src="https://copper-ready-guanaco-464.mypinata.cloud/ipfs/QmSonedE3a6r1zS9ukPYZPCTXqJX6gncwuRrXwFYhMAbU6?_gl=1*1hk0k8b*_ga*MTM1ODQ0MTgxMi4xNjk2NzkyMjEz*_ga_5RMPXG14TE*MTcwMjk2MjQwMC40My4xLjE3MDI5NjI4NTIuNjAuMC4w"
+              src="powertothepeopleno_bg_1_1x.webp"
               alt="Lawyer Image"
               objectFit={"contain"}
               boxSize={"15rem"}

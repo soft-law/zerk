@@ -20,7 +20,7 @@ export default function DIdentity() {
       <Heading m="3rem">Are you a Lawyer?</Heading>
       <Flex>
         <Image
-          src="https://copper-ready-guanaco-464.mypinata.cloud/ipfs/QmSonedE3a6r1zS9ukPYZPCTXqJX6gncwuRrXwFYhMAbU6?_gl=1*1hk0k8b*_ga*MTM1ODQ0MTgxMi4xNjk2NzkyMjEz*_ga_5RMPXG14TE*MTcwMjk2MjQwMC40My4xLjE3MDI5NjI4NTIuNjAuMC4w"
+          src="powertothepeopleno_bg_1_1x.webp"
           rounded={"10%"}
           w="35%"
           m="1.5rem"
