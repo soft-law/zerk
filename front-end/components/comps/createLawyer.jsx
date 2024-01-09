@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Spinner } from "@chakra-ui/react";
+import { Spinner,useToast } from "@chakra-ui/react";
 import {
   ModalBody,
   ModalFooter,
@@ -34,6 +34,7 @@ export default function CreateLawyer() {
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const toast = useToast();
 
   // const provider = new ethers.providers.Web3Provider(window.ethereum);
 
@@ -59,18 +60,53 @@ export default function CreateLawyer() {
       const transactionHash = receipt.transactionHash;
       //transaction success
       console.log(transactionHash);
+      toast({
+        title: 'Create Lawyer',
+        description: 'Lawyer  created successfully',
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+        position: 'top-right',
+        
+      });
       setLoading(false);
       setSuccess(true);
     } catch (error) {
-      console.log(`Error: ${error}`);
+      let errorMessage;
+  if (error.message && error.message.includes('user rejected transaction')) {
+    errorMessage = 'User denied the transaction.';
+  }else if (error.message && error.message.includes("Lawyer already exists")){
+    errorMessage =" Lawyer already exists"
+  } else {
+    errorMessage = `Unexpected error: ${error.message}`;
+  }
+
+  toast({
+    title: 'Create Lawyer',
+    description: `Error: ${errorMessage}`,
+    status: 'error',
+    duration: 2000,
+    isClosable: true,
+    position: 'top-right',
+  });
+      console.log(error)
     }
   };
 
   const handlecreateLawyer = async () => {
     if (licenseNumber && name && location && especiality) {
       createLawyer(licenseNumber, name, location, especiality);
+      
     } else {
-      console.log("Please complete all requirements.");
+      toast({
+        title: 'Create Lawyer',
+        description: 'Please provide all arguments',
+        status: 'info',
+        duration: 2000,
+        isClosable: true,
+        position: 'top-right',
+        
+      });
     }
   };
 
