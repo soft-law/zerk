@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useToast } from "@chakra-ui/react";
+import { useToast, Spinner } from "@chakra-ui/react";
 import {
   ModalBody,
   ModalFooter,
@@ -15,6 +15,8 @@ import {
   ModalContent,
   Modal,
   Input,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
 
 import { ethers } from "ethers";
@@ -26,7 +28,9 @@ export default function CreateJuster() {
   const [licenseNumber, setLicenseNumber] = useState("");
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
-  const toast =useToast()
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const toast = useToast();
 
   const createJuster = async (licenseNumber, name, location) => {
     try {
@@ -44,37 +48,45 @@ export default function CreateJuster() {
         location
       );
       console.log("transaction", transaction);
+      setLoading(true);
       const receipt = await transaction.wait();
       const transactionHash = receipt.transactionHash;
       console.log(transactionHash);
       toast({
-        title: 'Create Juster',
-        description: 'Juster  created successfully',
-        status: 'success',
+        title: "Create Juster",
+        description: "Juster  created successfully",
+        status: "success",
         duration: 2000,
         isClosable: true,
-        position: 'top-right',
-        
+        position: "top-right",
       });
+      setLoading(false);
+      setSuccess(true);
     } catch (error) {
       let errorMessage;
-  if (error.message && error.message.includes('user rejected transaction')) {
-    errorMessage = 'User denied the transaction.';
-  }else if (error.message && error.message.includes("Juster already exists")){
-    errorMessage =" Juster already exists"
-  } else {
-    errorMessage = `Unexpected error: ${error.message}`;
-  }
+      if (
+        error.message &&
+        error.message.includes("user rejected transaction")
+      ) {
+        errorMessage = "User denied the transaction.";
+      } else if (
+        error.message &&
+        error.message.includes("Juster already exists")
+      ) {
+        errorMessage = " Juster already exists";
+      } else {
+        errorMessage = `Unexpected error: ${error.message}`;
+      }
 
-  toast({
-    title: 'Create Juster',
-    description: `Error: ${errorMessage}`,
-    status: 'error',
-    duration: 2000,
-    isClosable: true,
-    position: 'top-right',
-  });
-      
+      toast({
+        title: "Create Juster",
+        description: `Error: ${errorMessage}`,
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+        position: "top-right",
+      });
+
       console.log(`Error: ${error}`);
     }
   };
@@ -82,16 +94,14 @@ export default function CreateJuster() {
   const handlecreateJuster = async () => {
     if (licenseNumber && name && location) {
       createJuster(licenseNumber, name, location);
-      
     } else {
       toast({
-        title: 'Create Juster',
-        description: 'Please provide all arguments',
-        status: 'info',
+        title: "Create Juster",
+        description: "Please provide all arguments",
+        status: "info",
         duration: 2000,
         isClosable: true,
-        position: 'top-right',
-        
+        position: "top-right",
       });
     }
   };
@@ -170,18 +180,47 @@ export default function CreateJuster() {
             </form>
           </ModalBody>
 
-          <ModalFooter justify={"space-arround"}>
-            <Button
-              bg={"grey"}
-              color={"white"}
-              w="full"
-              _hover={{
-                bg: "black",
-              }}
-              onClick={handlecreateJuster}
-            >
-              Create Juster
-            </Button>
+          <ModalFooter justify={"space-arround"} flexDir="column">
+            {success ? (
+              <Alert status="success" variant="solid">
+                <AlertIcon />
+                Data uploaded to the server. Fire on!
+              </Alert>
+            ) : (
+              <>
+                {loading ? (
+                  <>
+                    <Text>Transaction Loading</Text>
+                    <Spinner
+                      thickness="4px"
+                      speed="0.65s"
+                      emptyColor="gray.200"
+                      color="#adff00"
+                      size="xl"
+                    />
+                  </>
+                ) : (
+                  <></>
+                )}
+                {loading ? (
+                  <></>
+                ) : (
+                  <>
+                    <Button
+                      bg={"grey"}
+                      color={"white"}
+                      w="full"
+                      _hover={{
+                        bg: "black",
+                      }}
+                      onClick={handlecreateJuster}
+                    >
+                      Create Juster
+                    </Button>
+                  </>
+                )}
+              </>
+            )}
           </ModalFooter>
         </ModalContent>
       </Modal>

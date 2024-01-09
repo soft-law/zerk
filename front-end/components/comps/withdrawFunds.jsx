@@ -41,34 +41,38 @@ export default function WithdrawFunds() {
       const transactionHash = receipt.transactionHash;
       console.log(transactionHash);
       toast({
-        title: 'Withdraw Funds',
-        description: 'funds witdrawn Successfully',
-        status: 'success',
+        title: "Withdraw Funds",
+        description: "funds witdrawn Successfully",
+        status: "success",
         duration: 2000,
         isClosable: true,
-        position: 'top-right',
-        
+        position: "top-right",
       });
     } catch (error) {
       console.log(`Error: ${error}`);
       let errorMessage;
-      if (error.message && error.message.includes('Only Juster')) {
-        errorMessage = 'Only assigned Juster can withdraw funds';
-      }else if (error.message && error.message.includes('Case is not fully funded')) {
-        errorMessage = 'Case is not fully funded yet.';
-      }else if (error.message && error.message.includes('user rejected transaction')) {
-        errorMessage = 'User denied the transaction.';
+      if (error.message && error.message.includes("Only Juster")) {
+        errorMessage = "Only assigned Juster can withdraw funds";
+      } else if (
+        error.message &&
+        error.message.includes("Case is not fully funded")
+      ) {
+        errorMessage = "Case is not fully funded yet.";
+      } else if (
+        error.message &&
+        error.message.includes("user rejected transaction")
+      ) {
+        errorMessage = "User denied the transaction.";
       } else {
         errorMessage = `Unexpected error: ${error.message}`;
       }
       toast({
-        title: 'Withdraw Funds',
+        title: "Withdraw Funds",
         description: `Error: ${errorMessage}`,
-        status: 'error',
+        status: "error",
         duration: 3000,
         isClosable: true,
-        position: 'top-left',
-        
+        position: "top-left",
       });
     }
   };
@@ -78,13 +82,12 @@ export default function WithdrawFunds() {
       withdrawFunds(caseNumber);
     } else {
       toast({
-        title: 'Withdraw Funds',
-        description: 'Please enter a case no.',
-        status: 'info',
+        title: "Withdraw Funds",
+        description: "Please enter a case no.",
+        status: "info",
         duration: 2000,
         isClosable: true,
-        position: 'top-right',
-        
+        position: "top-right",
       });
     }
   };
@@ -101,7 +104,7 @@ export default function WithdrawFunds() {
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalContent bgColor={"#969696"}>
+        <ModalContent bgColor={"#151515"}>
           <Flex
             alignItems="center"
             flexDir="column"

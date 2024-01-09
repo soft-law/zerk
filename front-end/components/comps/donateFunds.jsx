@@ -44,38 +44,51 @@ export default function DonateToCase() {
       const transactionHash = receipt.transactionHash;
       console.log(transactionHash);
       toast({
-        title: 'Donate Funds',
-        description: 'Donation received successfully',
-        status: 'success',
+        title: "Donate Funds",
+        description: "Donation received successfully",
+        status: "success",
         duration: 2000,
         isClosable: true,
-        position: 'top-right',
-        
+        position: "top-right",
       });
     } catch (error) {
       console.log(`Error: ${error}`);
       let errorMessage;
-      if (error.message && error.message.includes('Case number does not exist')) {
-        errorMessage = 'Case number does not exist';
-      }else if (error.message && error.message.includes(' Case is not validated')) {
-        errorMessage = ' Case is not validated.';
-      }else if (error.message && error.message.includes(' insufficient funds')) {
-        errorMessage = ' insufficient funds.';
-      }else if (error.message && error.message.includes(' Invalid donation amount')) {
-        errorMessage = ' Invalid donation amount.';
-      }else if (error.message && error.message.includes('user rejected transaction')) {
-        errorMessage = 'User denied the transaction.';
+      if (
+        error.message &&
+        error.message.includes("Case number does not exist")
+      ) {
+        errorMessage = "Case number does not exist";
+      } else if (
+        error.message &&
+        error.message.includes(" Case is not validated")
+      ) {
+        errorMessage = " Case is not validated.";
+      } else if (
+        error.message &&
+        error.message.includes(" insufficient funds")
+      ) {
+        errorMessage = " insufficient funds.";
+      } else if (
+        error.message &&
+        error.message.includes(" Invalid donation amount")
+      ) {
+        errorMessage = " Invalid donation amount.";
+      } else if (
+        error.message &&
+        error.message.includes("user rejected transaction")
+      ) {
+        errorMessage = "User denied the transaction.";
       } else {
         errorMessage = `Unexpected error: ${error.message}`;
       }
       toast({
-        title: 'Donate Funds',
+        title: "Donate Funds",
         description: `Error: ${errorMessage}`,
-        status: 'error',
+        status: "error",
         duration: 3000,
         isClosable: true,
-        position: 'top-left',
-        
+        position: "top-left",
       });
     }
   };
@@ -85,13 +98,12 @@ export default function DonateToCase() {
       donateToCase(caseNumber, value);
     } else {
       toast({
-        title: 'Donate Funds',
-        description: 'Please provide all arguments',
-        status: 'info',
+        title: "Donate Funds",
+        description: "Please provide all arguments",
+        status: "info",
         duration: 2000,
         isClosable: true,
-        position: 'top-right',
-        
+        position: "top-right",
       });
     }
   };
@@ -108,7 +120,7 @@ export default function DonateToCase() {
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalContent bgColor={"#969696"}>
+        <ModalContent bgColor={"#151515"}>
           <Flex
             alignItems="center"
             flexDir="column"
