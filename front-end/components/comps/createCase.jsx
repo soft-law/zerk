@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useToast } from "@chakra-ui/react";
+import { Spinner, useToast } from "@chakra-ui/react";
 import {
   ModalBody,
   ModalFooter,
@@ -15,6 +15,8 @@ import {
   ModalContent,
   Modal,
   Input,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
 import { ethers } from "ethers";
 import { RotamContract } from "../../requireEnviromentVariables";
@@ -27,6 +29,8 @@ export default function CreateCase() {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const toast = useToast();
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const createCase = async (caseNumber, jurisdiction, price, description) => {
     try {
@@ -45,6 +49,7 @@ export default function CreateCase() {
         description
       );
       console.log("transaction", transaction);
+      setLoading(true);
       const receipt = await transaction.wait();
       const transactionHash = receipt.transactionHash;
       console.log(transactionHash);
@@ -56,30 +61,40 @@ export default function CreateCase() {
         isClosable: true,
         position: "top-right",
       });
+      setLoading(false);
+      setSuccess(true);
     } catch (error) {
       console.log(`Error: ${error}`);
       let errorMessage;
-      if (error.message && error.message.includes('Only Juster')) {
-        errorMessage = 'Only validated Juster can create cases';
+      if (error.message && error.message.includes("Only Juster")) {
+        errorMessage = "Only validated Juster can create cases";
       }
-    
+
       //error handling for rotam app chain Starts
-      else if (typeof error === 'object' && error.data && typeof error.data.message === 'string') {
-        
-        if (error.data.message.includes(' revert Only Juster')) {
-          errorMessage = 'Only validated Juster can create cases';
+      else if (
+        typeof error === "object" &&
+        error.data &&
+        typeof error.data.message === "string"
+      ) {
+        if (error.data.message.includes(" revert Only Juster")) {
+          errorMessage = "Only validated Juster can create cases";
         }
-        
-         if (error.data.message.includes('Case number already used')) {
-          errorMessage = 'Case number already used';
+
+        if (error.data.message.includes("Case number already used")) {
+          errorMessage = "Case number already used";
         }
-         
       }
       //error handling for rotam app chain Ends
-      else if (error.message && error.message.includes('Case number already used')) {
-        errorMessage = 'Case number already used.';
-      }else if (error.message && error.message.includes('user rejected transaction')) {
-        errorMessage = 'User denied the transaction.';
+      else if (
+        error.message &&
+        error.message.includes("Case number already used")
+      ) {
+        errorMessage = "Case number already used.";
+      } else if (
+        error.message &&
+        error.message.includes("user rejected transaction")
+      ) {
+        errorMessage = "User denied the transaction.";
       } else {
         errorMessage = `Unexpected error: ${error.message}`;
       }
@@ -191,18 +206,47 @@ export default function CreateCase() {
             </form>
           </ModalBody>
 
-          <ModalFooter justify={"space-arround"}>
-            <Button
-              bg={"grey"}
-              color={"white"}
-              w="full"
-              _hover={{
-                bg: "black",
-              }}
-              onClick={handlecreateCase}
-            >
-              Create a Case
-            </Button>
+          <ModalFooter justify={"space-arround"} flexDir="column">
+            {success ? (
+              <Alert status="success" variant="solid">
+                <AlertIcon />
+                Data uploaded to the server. Fire on!
+              </Alert>
+            ) : (
+              <>
+                {loading ? (
+                  <>
+                    <Text>Transaction Loading</Text>
+                    <Spinner
+                      thickness="4px"
+                      speed="0.65s"
+                      emptyColor="gray.200"
+                      color="#adff00"
+                      size="xl"
+                    />
+                  </>
+                ) : (
+                  <></>
+                )}
+                {loading ? (
+                  <></>
+                ) : (
+                  <>
+                    <Button
+                      bg={"grey"}
+                      color={"white"}
+                      w="full"
+                      _hover={{
+                        bg: "black",
+                      }}
+                      onClick={handlecreateCase}
+                    >
+                      Create Case
+                    </Button>
+                  </>
+                )}
+              </>
+            )}
           </ModalFooter>
         </ModalContent>
       </Modal>
