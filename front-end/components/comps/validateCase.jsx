@@ -54,7 +54,23 @@ export default function ValidateCase() {
       let errorMessage;
       if (error.message && error.message.includes('Only lawyer')) {
         errorMessage = 'Only validated lawyer can validate cases';
-      }else if (error.message && error.message.includes('Case is already validated')) {
+      }
+      //error handling for rotam app chain Starts
+      else if (typeof error === 'object' && error.data && typeof error.data.message === 'string') {
+        
+        if (error.data.message.includes(' revert Only lawyer')) {
+          errorMessage = 'Only validated lawyer can validate cases';
+        }
+        
+         if (error.data.message.includes('Case is already validated')) {
+          errorMessage = 'Case is already validated.';
+        }
+         if(error.data.message.includes('Case number does not exist')){
+          errorMessage = 'Case number does not exist';
+        }
+      }
+      //error handling for rotam app chain Ends
+      else if (error.message && error.message.includes('Case is already validated')) {
         errorMessage = 'Case is already validated.';
       }else if (error.message && error.message.includes('user rejected transaction')) {
         errorMessage = 'User denied the transaction.';

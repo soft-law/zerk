@@ -55,7 +55,22 @@ export default function ValidateJuster() {
       let errorMessage;
       if (error.message && error.message.includes('Only lawyer')) {
         errorMessage = 'Only validated lawyer can validate Justers';
-      }else if (error.message && error.message.includes('user rejected transaction')) {
+      }
+      
+      //error handling for rotam app chain Starts
+      else if (typeof error === 'object' && error.data && typeof error.data.message === 'string') {
+        
+        if (error.data.message.includes(' revert Only lawyer')) {
+          errorMessage = 'Only validated lawyer can validate Justers';
+        }
+        
+         if (error.data.message.includes('Juster is already validated')) {
+          errorMessage = 'Juster is already validated';
+        }
+         
+      }
+      //error handling for rotam app chain Ends
+      else if (error.message && error.message.includes('user rejected transaction')) {
         errorMessage = 'User denied the transaction.';
       }else if(error.message && error.message.includes('Juster is already validated')){
         errorMessage = 'Juster is already validated';
@@ -64,7 +79,7 @@ export default function ValidateJuster() {
         errorMessage = `Unexpected error: ${error.message}`;
       }
       toast({
-        title: 'Validate Case',
+        title: 'Validate Juster',
         description: `Error: ${errorMessage}`,
         status: 'error',
         duration: 3000,
