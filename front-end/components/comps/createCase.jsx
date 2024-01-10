@@ -59,18 +59,27 @@ export default function CreateCase() {
     } catch (error) {
       console.log(`Error: ${error}`);
       let errorMessage;
-      if (error.message && error.message.includes("Only Juster")) {
-        errorMessage = "Only validated Juster can create cases";
-      } else if (
-        error.message &&
-        error.message.includes("Case number already used")
-      ) {
-        errorMessage = "Case number already used.";
-      } else if (
-        error.message &&
-        error.message.includes("user rejected transaction")
-      ) {
-        errorMessage = "User denied the transaction.";
+      if (error.message && error.message.includes('Only Juster')) {
+        errorMessage = 'Only validated Juster can create cases';
+      }
+    
+      //error handling for rotam app chain Starts
+      else if (typeof error === 'object' && error.data && typeof error.data.message === 'string') {
+        
+        if (error.data.message.includes(' revert Only Juster')) {
+          errorMessage = 'Only validated Juster can create cases';
+        }
+        
+         if (error.data.message.includes('Case number already used')) {
+          errorMessage = 'Case number already used';
+        }
+         
+      }
+      //error handling for rotam app chain Ends
+      else if (error.message && error.message.includes('Case number already used')) {
+        errorMessage = 'Case number already used.';
+      }else if (error.message && error.message.includes('user rejected transaction')) {
+        errorMessage = 'User denied the transaction.';
       } else {
         errorMessage = `Unexpected error: ${error.message}`;
       }

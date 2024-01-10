@@ -51,18 +51,24 @@ export default function ValidateLawyer() {
     } catch (error) {
       console.log(`Error: ${error}`);
       let errorMessage;
-      if (error.message && error.message.includes("Only owner")) {
-        errorMessage = "Only Owner can validate Lawyer";
-      } else if (
-        error.message &&
-        error.message.includes(" Lawyer is already validated")
-      ) {
-        errorMessage = " Lawyer is already validated.";
-      } else if (
-        error.message &&
-        error.message.includes("user rejected transaction")
-      ) {
-        errorMessage = "User denied the transaction.";
+      if (error.message && error.message.includes('Only owner')) {
+        errorMessage = 'Only Owner can validate Lawyer';
+      }
+      //error handling for rotam app chain Starts
+      else if (typeof error === 'object' && error.data && typeof error.data.message === 'string') {
+        
+        if (error.data.message.includes(' revert Only owner')) {
+          errorMessage = 'Only Owner can validate Lawyer';
+        }
+        if (error.data.message.includes('revert Lawyer is already validated')) {
+          errorMessage = 'Lawyer is already validated.';
+        }
+      }
+      //error handling for rotam app chain Ends
+        else if (error.message && error.message.includes(' Lawyer is already validated')) {
+        errorMessage = ' Lawyer is already validated.';
+      }else if (error.message && error.message.includes('user rejected transaction')) {
+        errorMessage = 'User denied the transaction.';
       } else {
         errorMessage = `Unexpected error: ${error.message}`;
       }

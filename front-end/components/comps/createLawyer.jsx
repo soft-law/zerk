@@ -72,19 +72,24 @@ export default function CreateLawyer() {
       setSuccess(true);
     } catch (error) {
       let errorMessage;
-      if (
-        error.message &&
-        error.message.includes("user rejected transaction")
-      ) {
-        errorMessage = "User denied the transaction.";
-      } else if (
-        error.message &&
-        error.message.includes("Lawyer already exists")
-      ) {
-        errorMessage = " Lawyer already exists";
-      } else {
-        errorMessage = `Unexpected error: ${error.message}`;
-      }
+  if (error.message && error.message.includes('user rejected transaction')) {
+    errorMessage = 'User denied the transaction.';
+  }
+  
+   //error handling for rotam app chain starts
+   else if (typeof error === 'object' && error.data && typeof error.data.message === 'string') {
+        
+    if (error.data.message.includes(' revert Lawyer already exists')) {
+      errorMessage = 'Lawyer already exists';
+    }
+  
+  }
+  //error handling for rotam app chain ends
+  else if (error.message && error.message.includes("Lawyer already exists")){
+    errorMessage =" Lawyer already exists"
+  } else {
+    errorMessage = `Unexpected error: ${error.message}`;
+  }
 
       toast({
         title: "Create Lawyer",
