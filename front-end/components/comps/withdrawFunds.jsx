@@ -54,7 +54,22 @@ export default function WithdrawFunds() {
       let errorMessage;
       if (error.message && error.message.includes('Only Juster')) {
         errorMessage = 'Only assigned Juster can withdraw funds';
-      }else if (error.message && error.message.includes('Case is not fully funded')) {
+      }
+      
+       //error handling for rotam app chain Starts
+       else if (typeof error === 'object' && error.data && typeof error.data.message === 'string') {
+        
+        if (error.data.message.includes(' revert Only Juster')) {
+          errorMessage = 'Only assigned Juster can withdraw funds';
+        }
+        
+         if (error.data.message.includes('Case is not fully funded')) {
+          errorMessage = 'Case is not fully funded';
+        }
+         
+      }
+      //error handling for rotam app chain Ends
+      else if (error.message && error.message.includes('Case is not fully funded')) {
         errorMessage = 'Case is not fully funded yet.';
       }else if (error.message && error.message.includes('user rejected transaction')) {
         errorMessage = 'User denied the transaction.';

@@ -60,7 +60,18 @@ export default function CreateJuster() {
       let errorMessage;
   if (error.message && error.message.includes('user rejected transaction')) {
     errorMessage = 'User denied the transaction.';
-  }else if (error.message && error.message.includes("Juster already exists")){
+  }
+  
+  //error handling for rotam app chain starts
+  else if (typeof error === 'object' && error.data && typeof error.data.message === 'string') {
+        
+    if (error.data.message.includes(' revert Juster already exists')) {
+      errorMessage = 'Juster already exists';
+    }
+  
+  }
+  //error handling for rotam app chain ends
+  else if (error.message && error.message.includes("Juster already exists")){
     errorMessage =" Juster already exists"
   } else {
     errorMessage = `Unexpected error: ${error.message}`;
