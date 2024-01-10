@@ -54,31 +54,36 @@ export default function DonateToCase() {
     } catch (error) {
       console.log(`Error: ${error}`);
       let errorMessage;
-      if (
-        error.message &&
-        error.message.includes("Case number does not exist")
-      ) {
-        errorMessage = "Case number does not exist";
-      } else if (
-        error.message &&
-        error.message.includes(" Case is not validated")
-      ) {
-        errorMessage = " Case is not validated.";
-      } else if (
-        error.message &&
-        error.message.includes(" insufficient funds")
-      ) {
-        errorMessage = " insufficient funds.";
-      } else if (
-        error.message &&
-        error.message.includes(" Invalid donation amount")
-      ) {
-        errorMessage = " Invalid donation amount.";
-      } else if (
-        error.message &&
-        error.message.includes("user rejected transaction")
-      ) {
-        errorMessage = "User denied the transaction.";
+      if (error.message && error.message.includes('Case number does not exist')) {
+        errorMessage = 'Case number does not exist';
+      }
+      
+       //error handling for rotam app chain Starts
+       else if (typeof error === 'object' && error.data && typeof error.data.message === 'string') {
+        
+        if (error.data.message.includes('Case number does not exist')) {
+          errorMessage = 'Case number does not exist';
+        }
+        
+         if (error.data.message.includes('Case is not validated')) {
+          errorMessage = 'Case is not validated';
+        }
+         if(error.data.message.includes('evm error: OutOfFund')){
+          errorMessage = 'insufficient funds';
+        }
+         if(error.data.message.includes('Invalid donation amount')){
+          errorMessage = 'Invalid donation amount';
+        }
+      }
+      //error handling for rotam app chain Ends
+      else if (error.message && error.message.includes(' Case is not validated')) {
+        errorMessage = ' Case is not validated.';
+      }else if (error.message && error.message.includes(' insufficient funds')) {
+        errorMessage = ' insufficient funds.';
+      }else if (error.message && error.message.includes(' Invalid donation amount')) {
+        errorMessage = ' Invalid donation amount.';
+      }else if (error.message && error.message.includes('user rejected transaction')) {
+        errorMessage = 'User denied the transaction.';
       } else {
         errorMessage = `Unexpected error: ${error.message}`;
       }
