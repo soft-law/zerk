@@ -32,7 +32,7 @@ export default function Team() {
         <Box align="center" m="5">
           <Image
             src={
-              "https://copper-ready-guanaco-464.mypinata.cloud/ipfs/QmehojxFh3g14QhDNzSZ7fAMxnemnLAxy8PbEbNmwqmbzV?_gl=1*14nkjjq*_ga*MTM1ODQ0MTgxMi4xNjk2NzkyMjEz*_ga_5RMPXG14TE*MTcwMjk2MjQwMC40My4xLjE3MDI5NjI0MjguMzIuMC4w"
+              "ganesh.png"
             }
             sx={profileImage}
             alt="Ganesh profile pic"
@@ -43,7 +43,7 @@ export default function Team() {
         <Box align="center" m="5">
           <Image
             src={
-              "https://copper-ready-guanaco-464.mypinata.cloud/ipfs/QmXVvnNzqoEPHtQSAFhqS9xGLk2mwh7aDNZWQwvtGgFrDK?_gl=1*163zsyz*_ga*MTM1ODQ0MTgxMi4xNjk2NzkyMjEz*_ga_5RMPXG14TE*MTcwMzAxMzIwMC40NC4xLjE3MDMwMTMyMjUuMzUuMC4w"
+              "nagra.png"
             }
             sx={profileImage}
             alt="Nagra profile pic"
@@ -54,7 +54,7 @@ export default function Team() {
         <Box align="center" m="5">
           <Image
             src={
-              "https://copper-ready-guanaco-464.mypinata.cloud/ipfs/QmTmNoxRw8XqgQ3h7Ypt53HxcPGybozZUugZwdxWFsPGCw?_gl=1*1upszaj*_ga*MTM1ODQ0MTgxMi4xNjk2NzkyMjEz*_ga_5RMPXG14TE*MTcwMzEzOTExNC40Ny4xLjE3MDMxMzkxMjUuNDkuMC4w"
+              "nik.png"
             }
             sx={profileImage}
             alt="Ivan profile pic"
